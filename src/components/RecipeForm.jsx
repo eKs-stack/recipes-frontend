@@ -95,7 +95,7 @@ const RecipeForm = ({
         />
       </div>
 
-      <button className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button className="w-full bg-blue-600  hover:bg-blue-700 text-white px-4 py-2 rounded">
         {submitText}
       </button>
     </form>
