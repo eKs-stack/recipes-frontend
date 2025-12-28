@@ -36,7 +36,9 @@ const Home = () => {
   return (
     <div className="space-y-6">
       <header className="text-center space-y-2">
-        <h1 className="text-3xl font-bold text-black mt-3">Recetas Familiares</h1>
+        <h1 className="text-3xl font-bold text-black mt-3">
+          Recetas Familiares
+        </h1>
       </header>
 
       {message && (

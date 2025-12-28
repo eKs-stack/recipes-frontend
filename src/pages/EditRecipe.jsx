@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getRecipeById, updateRecipe } from '../services/recipes'
+import { getRecipeById, updateRecipe, deleteRecipe } from '../services/recipes'
 import RecipeForm from '../components/RecipeForm'
 
 const EditRecipe = () => {
@@ -34,6 +34,20 @@ const EditRecipe = () => {
 
     loadRecipe()
   }, [id])
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      '¿Seguro que quieres eliminar esta receta?'
+    )
+    if (!confirmDelete) return
+
+    try {
+      await deleteRecipe(id)
+      navigate('/')
+    } catch {
+      setError('No se pudo eliminar la receta')
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -83,6 +97,13 @@ const EditRecipe = () => {
         servings={servings}
         setServings={setServings}
       />
+      <button
+        type="button"
+        onClick={handleDelete}
+        className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded"
+      >
+        Eliminar receta
+      </button>
     </div>
   )
 }
