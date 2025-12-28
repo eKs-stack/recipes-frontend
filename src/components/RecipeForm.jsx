@@ -62,16 +62,6 @@ const RecipeForm = ({
       />
 
       <div>
-        <label className="block font-medium mb-1">Imagen</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
-          className="w-full"
-        />
-      </div>
-
-      <div>
         <label className="block font-medium mb-1">Categoría</label>
         <input
           className="w-full border p-2 rounded"
