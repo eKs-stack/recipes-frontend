@@ -15,7 +15,6 @@ const RecipeForm = ({
   setDifficulty,
   servings,
   setServings,
-  setImage,
   onSubmit,
   submitText
 }) => {
