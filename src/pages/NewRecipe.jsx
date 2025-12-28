@@ -11,7 +11,6 @@ const NewRecipe = () => {
   const [ingredients, setIngredients] = useState('')
   const [steps, setSteps] = useState('')
   const [prepTime, setPrepTime] = useState('')
-  const [image, setImage] = useState(null)
   const [category, setCategory] = useState('')
   const [difficulty, setDifficulty] = useState('Fácil')
   const [servings, setServings] = useState(1)
@@ -28,10 +27,6 @@ const NewRecipe = () => {
     formData.append('category', category)
     formData.append('difficulty', difficulty)
     formData.append('servings', servings)
-
-    if (image) {
-      formData.append('image', image)
-    }
 
     try {
       await createRecipe(formData)
@@ -66,7 +61,6 @@ const NewRecipe = () => {
         setDifficulty={setDifficulty}
         servings={servings}
         setServings={setServings}
-        setImage={setImage}
         onSubmit={handleSubmit}
         submitText="Crear receta"
       />
