@@ -13,6 +13,10 @@ const EditRecipe = () => {
   const [steps, setSteps] = useState('')
   const [prepTime, setPrepTime] = useState('')
   const [error, setError] = useState(null)
+  const [image, setImage] = useState(null)
+  const [category, setCategory] = useState('')
+  const [difficulty, setDifficulty] = useState('Fácil')
+  const [servings, setServings] = useState(1)
 
   useEffect(() => {
     const loadRecipe = async () => {
@@ -70,6 +74,14 @@ const EditRecipe = () => {
         setPrepTime={setPrepTime}
         onSubmit={handleSubmit}
         submitText="Guardar cambios"
+        image={image}
+        setImage={setImage}
+        category={category}
+        setCategory={setCategory}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
+        servings={servings}
+        setServings={setServings}
       />
     </div>
   )

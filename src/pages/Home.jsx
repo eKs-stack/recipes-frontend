@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { getRecipes, deleteRecipe } from '../services/recipes'
+import RecipeCard from '../components/RecipeCard'
 
 const Home = () => {
   const [recipes, setRecipes] = useState([])
@@ -22,11 +22,11 @@ const Home = () => {
   const handleDelete = async (id) => {
     try {
       await deleteRecipe(id)
-      setMessage('Receta eliminada')
-      loadRecipes()
+      setMessage('Receta eliminada correctamente')
+      setRecipes((prev) => prev.filter((r) => r._id !== id))
       setTimeout(() => setMessage(null), 2000)
     } catch {
-      setMessage('Error al borrar receta')
+      setMessage('Error al eliminar la receta')
     }
   }
 
@@ -34,41 +34,49 @@ const Home = () => {
     loadRecipes()
   }, [])
 
-  if (loading) return <p>Cargando...</p>
-  if (error) return <p>{error}</p>
+  if (loading) {
+    return (
+      <p className="text-center text-zinc-400 mt-10">Cargando recetas...</p>
+    )
+  }
+
+  if (error) {
+    return <p className="text-center text-red-500 mt-10">{error}</p>
+  }
 
   return (
-    <div className="mt-6">
-      <h2>Lista de recetas</h2>
+    <div className="space-y-6">
+      <header className="text-center space-y-2">
+        <h1 className="text-3xl font-bold text-white">Recetas Familiares</h1>
+        <p className="text-zinc-400">
+          Sabores que nos unen, de generación en generación
+        </p>
+      </header>
 
       {message && (
-        <div className="bg-green-100 text-green-700 p-2 rounded mb-4">
+        <div className="bg-emerald-100 text-emerald-700 p-3 rounded text-center">
           {message}
         </div>
       )}
 
-      <ul className="space-y-3">
-        {recipes.map((recipe) => (
-          <li
-            key={recipe._id}
-            className="border p-3 rounded flex justify-between items-center mt-3"
-          >
-            <Link
-              to={`/recipes/${recipe._id}`}
-              className="font-semibold text-black"
-            >
-              {recipe.title}
-            </Link>
-            <Link
-              to={`/recipes/${recipe._id}/edit`}
-              className="text-blue-600 hover:underline mr-3"
-            >
-              Editar
-            </Link>
-            <button onClick={() => handleDelete(recipe._id)}>Borrar</button>
-          </li>
-        ))}
-      </ul>
+      {recipes.length === 0 ? (
+        <p className="text-center text-zinc-400">No hay recetas todavía</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recipes.map((recipe) => (
+            <div key={recipe._id} className="relative">
+              <RecipeCard recipe={recipe} />
+
+              <button
+                onClick={() => handleDelete(recipe._id)}
+                className="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded hover:bg-red-700 transition"
+              >
+                Borrar
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

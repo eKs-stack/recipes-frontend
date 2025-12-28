@@ -8,13 +8,10 @@ export const getRecipes = async () => {
   return response.json()
 }
 
-export const createRecipe = async (recipe) => {
+export const createRecipe = async (formData) => {
   const response = await fetch(API_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(recipe)
+    body: formData
   })
 
   if (!response.ok) {

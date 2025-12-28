@@ -5,44 +5,45 @@ import RecipeForm from '../components/RecipeForm'
 
 const NewRecipe = () => {
   const navigate = useNavigate()
-  const [message, setMessage] = useState(null)
   const [error, setError] = useState(null)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [steps, setSteps] = useState('')
   const [prepTime, setPrepTime] = useState('')
+  const [image, setImage] = useState(null)
+  const [category, setCategory] = useState('')
+  const [difficulty, setDifficulty] = useState('Fácil')
+  const [servings, setServings] = useState(1)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setError(null)
-    setMessage(null)
 
-    const newRecipe = {
-      title,
-      description,
-      ingredients: ingredients.split(',').map((i) => i.trim()),
-      steps,
-      prepTime: Number(prepTime)
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('ingredients', ingredients)
+    formData.append('steps', steps)
+    formData.append('prepTime', prepTime)
+    formData.append('category', category)
+    formData.append('difficulty', difficulty)
+    formData.append('servings', servings)
+
+    if (image) {
+      formData.append('image', image)
     }
 
     try {
-      await createRecipe(newRecipe)
-      setMessage('Receta creada correctamente')
-      setTimeout(() => navigate('/'), 1000)
+      await createRecipe(formData)
+      navigate('/')
     } catch {
-      setError('No se pudo crear la receta')
+      setError('Error creando receta')
     }
   }
 
   return (
     <div className="max-w-xl mx-auto mt-6">
       <h2 className="text-2xl font-bold mb-6">Nueva receta</h2>
-      {message && (
-        <div className="bg-green-100 text-green-700 p-2 rounded mb-4">
-          {message}
-        </div>
-      )}
 
       {error && (
         <div className="bg-red-100 text-red-700 p-2 rounded mb-4">{error}</div>
@@ -59,6 +60,13 @@ const NewRecipe = () => {
         setSteps={setSteps}
         prepTime={prepTime}
         setPrepTime={setPrepTime}
+        category={category}
+        setCategory={setCategory}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
+        servings={servings}
+        setServings={setServings}
+        setImage={setImage}
         onSubmit={handleSubmit}
         submitText="Crear receta"
       />

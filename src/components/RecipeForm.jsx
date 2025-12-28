@@ -9,6 +9,13 @@ const RecipeForm = ({
   setSteps,
   prepTime,
   setPrepTime,
+  category,
+  setCategory,
+  difficulty,
+  setDifficulty,
+  servings,
+  setServings,
+  setImage,
   onSubmit,
   submitText
 }) => {
@@ -53,6 +60,51 @@ const RecipeForm = ({
         placeholder="Tiempo (min)"
         required
       />
+
+      <div>
+        <label className="block font-medium mb-1">Imagen</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+          className="w-full"
+        />
+      </div>
+
+      <div>
+        <label className="block font-medium mb-1">Categoría</label>
+        <input
+          className="w-full border p-2 rounded"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block font-medium mb-1">Dificultad</label>
+        <select
+          className="w-full border p-2 rounded"
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value)}
+        >
+          <option>Fácil</option>
+          <option>Media</option>
+          <option>Difícil</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block font-medium mb-1">Porciones</label>
+        <input
+          type="number"
+          min="1"
+          className="w-full border p-2 rounded"
+          value={servings}
+          onChange={(e) => setServings(e.target.value)}
+          required
+        />
+      </div>
 
       <button className="bg-blue-600 text-white px-4 py-2 rounded">
         {submitText}
