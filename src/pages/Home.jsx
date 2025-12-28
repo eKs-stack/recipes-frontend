@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getRecipes, deleteRecipe } from '../services/recipes'
+import { getRecipes } from '../services/recipes'
 import RecipeCard from '../components/RecipeCard'
 
 const Home = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [message, setMessage] = useState(null)
+  const [message] = useState(null)
 
   const loadRecipes = async () => {
     try {
@@ -16,17 +16,6 @@ const Home = () => {
       setError('No se pudieron cargar las recetas')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteRecipe(id)
-      setMessage('Receta eliminada correctamente')
-      setRecipes((prev) => prev.filter((r) => r._id !== id))
-      setTimeout(() => setMessage(null), 2000)
-    } catch {
-      setMessage('Error al eliminar la receta')
     }
   }
 
@@ -66,13 +55,6 @@ const Home = () => {
           {recipes.map((recipe) => (
             <div key={recipe._id} className="relative">
               <RecipeCard recipe={recipe} />
-
-              <button
-                onClick={() => handleDelete(recipe._id)}
-                className="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded hover:bg-red-700 transition"
-              >
-                Borrar
-              </button>
             </div>
           ))}
         </div>

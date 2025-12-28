@@ -16,25 +16,25 @@ const NewRecipe = () => {
   const [servings, setServings] = useState(1)
 
   const handleSubmit = async (e) => {
-  e.preventDefault()
+    e.preventDefault()
 
-  try {
-    await createRecipe({
-      title,
-      description,
-      ingredients,
-      steps,
-      prepTime: Number(prepTime),
-      category,
-      difficulty,
-      servings: Number(servings)
-    })
+    try {
+      await createRecipe({
+        title,
+        description,
+        ingredients,
+        steps,
+        prepTime: Number(prepTime),
+        category,
+        difficulty,
+        servings: Number(servings)
+      })
 
-    navigate('/')
-  } catch {
-    setError('Error creando receta')
+      navigate('/')
+    } catch {
+      setError('Error creando receta')
+    }
   }
-}
 
   return (
     <div className="max-w-xl mx-auto mt-6">
