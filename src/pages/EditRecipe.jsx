@@ -1,0 +1,78 @@
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getRecipeById, updateRecipe } from '../services/recipes'
+import RecipeForm from '../components/RecipeForm'
+
+const EditRecipe = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [ingredients, setIngredients] = useState('')
+  const [steps, setSteps] = useState('')
+  const [prepTime, setPrepTime] = useState('')
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const loadRecipe = async () => {
+      try {
+        const recipe = await getRecipeById(id)
+        setTitle(recipe.title)
+        setDescription(recipe.description)
+        setIngredients(recipe.ingredients.join(', '))
+        setSteps(recipe.steps)
+        setPrepTime(recipe.prepTime)
+      } catch {
+        setError('No se pudo cargar la receta')
+      }
+    }
+
+    loadRecipe()
+  }, [id])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      await updateRecipe(id, {
+        title,
+        description,
+        ingredients: ingredients.split(',').map((i) => i.trim()),
+        steps,
+        prepTime: Number(prepTime)
+      })
+
+      navigate(`/recipes/${id}`)
+    } catch {
+      setError('No se pudo actualizar la receta')
+    }
+  }
+
+  return (
+    <div className="max-w-xl mx-auto mt-6">
+      <h2 className="text-2xl font-bold mb-6">Editar receta</h2>
+
+      {error && (
+        <div className="bg-red-100 text-red-700 p-2 rounded mb-4">{error}</div>
+      )}
+
+      <RecipeForm
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        ingredients={ingredients}
+        setIngredients={setIngredients}
+        steps={steps}
+        setSteps={setSteps}
+        prepTime={prepTime}
+        setPrepTime={setPrepTime}
+        onSubmit={handleSubmit}
+        submitText="Guardar cambios"
+      />
+    </div>
+  )
+}
+
+export default EditRecipe

@@ -33,3 +33,29 @@ export const deleteRecipe = async (id) => {
     throw new Error('Error al borrar receta')
   }
 }
+
+export const getRecipeById = async (id) => {
+  const response = await fetch(`${API_URL}/${id}`)
+
+  if (!response.ok) {
+    throw new Error('Error al obtener la receta')
+  }
+
+  return response.json()
+}
+
+export const updateRecipe = async (id, updatedRecipe) => {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedRecipe)
+  })
+
+  if (!response.ok) {
+    throw new Error('Error al actualizar la receta')
+  }
+
+  return response.json()
+}
