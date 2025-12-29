@@ -8,9 +8,10 @@ import EditRecipe from './pages/EditRecipe'
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="max-w-3xl mx-auto p-4">
+      <div className="w-full mx-auto p-4">
         <Header />
-
+      </div>
+      <div className="max-w-6xl mx-auto p-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<NewRecipe />} />
