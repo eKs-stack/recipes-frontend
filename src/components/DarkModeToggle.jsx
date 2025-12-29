@@ -16,7 +16,7 @@ const DarkModeToggle = () => {
   }, [dark])
 
   const toggleTheme = () => {
-    setDark(prev => !prev)
+    setDark((prev) => !prev)
   }
 
   return (

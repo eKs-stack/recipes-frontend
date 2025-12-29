@@ -1,4 +1,4 @@
-import RecipeCard from "./RecipeCard"
+import RecipeCard from './RecipeCard'
 export default function RecipeGrid({ recipes, onSelectRecipe }) {
   if (!recipes || recipes.length === 0) {
     return (
@@ -19,4 +19,4 @@ export default function RecipeGrid({ recipes, onSelectRecipe }) {
       ))}
     </div>
   )
-}   
+}

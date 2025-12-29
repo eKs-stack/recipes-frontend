@@ -24,9 +24,16 @@ const EditRecipe = () => {
         const recipe = await getRecipeById(id)
         setTitle(recipe.title)
         setDescription(recipe.description)
-        setIngredients(recipe.ingredients.join(', '))
-        setSteps(recipe.steps)
-        setPrepTime(recipe.prepTime)
+        setIngredients(
+          Array.isArray(recipe.ingredients)
+            ? recipe.ingredients.join(', ')
+            : recipe.ingredients || ''
+        )
+        setSteps(recipe.steps || '')
+        setPrepTime(recipe.prepTime ?? '')
+        setCategory(recipe.category ?? '')
+        setDifficulty(recipe.difficulty ?? 'Fácil')
+        setServings(recipe.servings ?? 1)
       } catch {
         setError('No se pudo cargar la receta')
       }
@@ -53,12 +60,20 @@ const EditRecipe = () => {
     e.preventDefault()
 
     try {
+      const ingredientsList = ingredients
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean)
+
       await updateRecipe(id, {
         title,
         description,
-        ingredients: ingredients.split(',').map((i) => i.trim()),
+        ingredients: ingredientsList,
         steps,
-        prepTime: Number(prepTime)
+        prepTime: Number(prepTime),
+        category,
+        difficulty,
+        servings: Number(servings)
       })
 
       navigate(`/recipes/${id}`)

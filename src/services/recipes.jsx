@@ -1,4 +1,4 @@
-const API_URL = 'https://recipes-backend-d7dm.onrender.com/api'
+import { API_URL, getAuthHeaders } from './api'
 
 export const getRecipes = async () => {
   const res = await fetch(`${API_URL}/recipes`)
@@ -10,7 +10,8 @@ export const createRecipe = async (data) => {
   const response = await fetch(`${API_URL}/recipes`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      ...getAuthHeaders()
     },
     body: JSON.stringify(data)
   })
@@ -24,7 +25,10 @@ export const createRecipe = async (data) => {
 
 export const deleteRecipe = async (id) => {
   const response = await fetch(`${API_URL}/recipes/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      ...getAuthHeaders()
+    }
   })
 
   if (!response.ok) {
@@ -46,7 +50,8 @@ export const updateRecipe = async (id, updatedRecipe) => {
   const response = await fetch(`${API_URL}/recipes/${id}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      ...getAuthHeaders()
     },
     body: JSON.stringify(updatedRecipe)
   })

@@ -19,10 +19,15 @@ const NewRecipe = () => {
     e.preventDefault()
 
     try {
+      const ingredientsList = ingredients
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean)
+
       await createRecipe({
         title,
         description,
-        ingredients,
+        ingredients: ingredientsList,
         steps,
         prepTime: Number(prepTime),
         category,

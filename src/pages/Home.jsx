@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import { getRecipes } from "../services/recipes"
-import RecipeGrid from "../components/RecipeGrid"
+import { useEffect, useState } from 'react'
+import { getRecipes } from '../services/recipes'
+import RecipeGrid from '../components/RecipeGrid'
 
 export default function Home() {
   const [recipes, setRecipes] = useState([])
@@ -15,7 +15,7 @@ export default function Home() {
         const data = await getRecipes()
         setRecipes(data)
       } catch {
-        setError("No se pudieron cargar las recetas")
+        setError('No se pudieron cargar las recetas')
       } finally {
         setLoading(false)
       }

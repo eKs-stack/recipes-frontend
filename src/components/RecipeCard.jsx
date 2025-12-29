@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom'
 import { Clock } from 'lucide-react'
+import { useAuth } from '../context/useAuth'
 
 const RecipeCard = ({ recipe }) => {
+  const { user, isAuthenticated } = useAuth()
+
+  const userId = user?.id || user?._id
+  const ownerId =
+    typeof recipe.owner === 'string' ? recipe.owner : recipe.owner?._id
+  const isOwner = Boolean(isAuthenticated && userId && ownerId === userId)
+
   return (
-    <Link
-      to={`/recipes/${recipe._id}`}
-      className="group block bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/50 transition-all duration-300"
-    >
-      <div className="p-4">
+    <div className="group block bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/50 transition-all duration-300">
+      <Link to={`/recipes/${recipe._id}`} className="block p-4">
         <h3 className="text-base font-semibold text-white mb-2 group-hover:text-emerald-400 transition-colors line-clamp-1">
           {recipe.title}
         </h3>
@@ -22,8 +27,19 @@ const RecipeCard = ({ recipe }) => {
             <span>{recipe.prepTime} min</span>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+
+      {isOwner && (
+        <div className="px-4 pb-4">
+          <Link
+            to={`/recipes/${recipe._id}/edit`}
+            className="text-sm text-emerald-400 hover:underline"
+          >
+            Editar
+          </Link>
+        </div>
+      )}
+    </div>
   )
 }
 
