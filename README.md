@@ -1,16 +1,59 @@
-# React + Vite
+# Recipes Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend en React + Vite para consumir la API de recetas con autenticacion y
+CRUD completo.
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- Vite
+- React Router
+- Tailwind CSS
+- Axios
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Registro e inicio de sesion (token en localStorage)
+- Rutas protegidas para crear y editar recetas
+- Listado, detalle, creacion, edicion y borrado de recetas
 
-## Expanding the ESLint configuration
+## Instalacion y ejecucion
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Variables de entorno
+
+Crea un archivo `.env` en la raiz del proyecto:
+
+```env
+# Backend local
+VITE_API_URL=http://localhost:3000/api
+```
+
+Si no defines `VITE_API_URL`, el frontend usa por defecto:
+`https://recipes-backend-d7dm.onrender.com/api`.
+
+## Endpoints usados
+
+- Auth: `POST /api/auth/login`, `POST /api/auth/register`
+- Recipes: `GET/POST /api/recipes`,
+  `GET/PUT/DELETE /api/recipes/:id`
+
+Las rutas protegidas requieren `Authorization: Bearer <token>`.
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Solucion de problemas
+
+- 400 "Credenciales invalidas": el usuario no existe en el backend o la
+  contrasena no coincide. Registra la cuenta en el mismo backend definido por
+  `VITE_API_URL`.
+- 401 al crear/editar/borrar: verifica que el token exista y sea valido.
