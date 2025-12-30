@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { Eye, EyeOff } from 'lucide-react'
 import { loginUser } from '../services/auth'
 import { useAuth } from '../context/useAuth'
 import { showError } from '../utils/alerts'
@@ -10,6 +11,7 @@ const Login = () => {
 
   const [identifier, setIdentifier] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,23 +45,57 @@ const Login = () => {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]"
-          placeholder="Email o usuario"
-          value={identifier}
-          onChange={(e) => setIdentifier(e.target.value)}
-          required
-        />
+        <div>
+          <label
+            htmlFor="login-identifier"
+            className="mb-1 block text-sm font-medium text-[var(--muted)]"
+          >
+            Email o usuario
+          </label>
+          <input
+            id="login-identifier"
+            type="text"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]"
+            placeholder="Email o usuario"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
+            required
+          />
+        </div>
 
-        <input
-          type="password"
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div>
+          <label
+            htmlFor="login-password"
+            className="mb-1 block text-sm font-medium text-[var(--muted)]"
+          >
+            Contraseña
+          </label>
+          <div className="relative">
+            <input
+              id="login-password"
+              type={showPassword ? 'text' : 'password'}
+              className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 pr-10 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] transition hover:text-[var(--accent)]"
+              aria-label={
+                showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'
+              }
+            >
+              {showPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+        </div>
 
         <button className="w-full rounded-lg bg-[var(--accent)] py-2.5 text-sm font-semibold text-[var(--bg-0)] transition hover:bg-[var(--accent-2)]">
           Entrar

@@ -41,9 +41,7 @@ const Admin = () => {
   }
 
   if (loading) {
-    return (
-      <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
-    )
+    return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
   }
 
   if (error) {
@@ -82,7 +80,8 @@ const Admin = () => {
                   {recipe.title}
                 </p>
                 <p className="text-xs text-[var(--muted)]">
-                  {recipe.category} · {recipe.difficulty} · {recipe.prepTime} min
+                  {recipe.category} · {recipe.difficulty} · {recipe.prepTime}{' '}
+                  min
                 </p>
                 <p className="text-xs text-[var(--muted)]">
                   Autor: {recipe.owner?.username || 'Sin autor'}

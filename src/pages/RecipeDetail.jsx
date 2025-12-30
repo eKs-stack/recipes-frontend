@@ -33,8 +33,10 @@ const RecipeDetail = () => {
 
   const isOwner = Boolean(isAuthenticated && userId && ownerId === userId)
 
-  if (loading) return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
-  if (error) return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
+  if (loading)
+    return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
+  if (error)
+    return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   if (!recipe)
     return (
       <p className="mt-20 text-center text-[var(--muted)]">

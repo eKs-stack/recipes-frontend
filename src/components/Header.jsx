@@ -6,11 +6,8 @@ import { useAuth } from '../context/useAuth'
 export default function Header() {
   const { isAuthenticated, logout, user } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const displayName =
-    user?.name || user?.username || user?.email || 'chef'
-  const brandLabel = isAuthenticated
-    ? `Hola ${displayName}`
-    : 'Cocina Hristov'
+  const displayName = user?.name || user?.username || user?.email || 'chef'
+  const brandLabel = isAuthenticated ? `Hola ${displayName}` : 'Cocina Hristov'
   const isAdmin = user?.role === 'admin'
 
   const toggleMobile = () => {

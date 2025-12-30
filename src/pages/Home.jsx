@@ -50,7 +50,11 @@ export default function Home() {
   }, [])
 
   if (loading) {
-    return <p className="mt-20 text-center text-[var(--muted)]">Cargando recetas...</p>
+    return (
+      <p className="mt-20 text-center text-[var(--muted)]">
+        Cargando recetas...
+      </p>
+    )
   }
 
   if (error) {
@@ -89,9 +93,7 @@ export default function Home() {
   return (
     <main className="page-fade py-2">
       <div className="mb-12 text-center">
-        <h1 className="text-4xl font-semibold sm:text-5xl">
-          Recetas
-        </h1>
+        <h1 className="text-4xl font-semibold sm:text-5xl">Recetas</h1>
         <h2 className="mt-3 text-base text-[var(--muted)] sm:text-lg">
           Explora ideas nuevas y guarda tus favoritas.
         </h2>

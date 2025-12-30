@@ -27,7 +27,11 @@ const MyRecipes = () => {
   }, [])
 
   if (loading) {
-    return <p className="mt-20 text-center text-[var(--muted)]">Cargando recetas...</p>
+    return (
+      <p className="mt-20 text-center text-[var(--muted)]">
+        Cargando recetas...
+      </p>
+    )
   }
 
   if (error) {

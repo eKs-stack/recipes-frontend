@@ -1,5 +1,9 @@
 import RecipeCard from './RecipeCard'
-export default function RecipeGrid({ recipes, onSelectRecipe, showEdit = true }) {
+export default function RecipeGrid({
+  recipes,
+  onSelectRecipe,
+  showEdit = true
+}) {
   if (!recipes || recipes.length === 0) {
     return (
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] py-20 text-center">
