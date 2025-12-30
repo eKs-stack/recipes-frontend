@@ -7,7 +7,7 @@ const Login = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
 
-  const [email, setEmail] = useState('')
+  const [identifier, setIdentifier] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
 
@@ -15,7 +15,11 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      const data = await loginUser({ email, password })
+      const payload = identifier.includes('@')
+        ? { email: identifier, password }
+        : { username: identifier, password }
+
+      const data = await loginUser(payload)
       const authToken = data?.token || data?.accessToken || data?.jwt
       const authUser = data?.user || data?.profile
 
@@ -41,11 +45,11 @@ const Login = () => {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
-          type="email"
+          type="text"
           className="w-full border p-2 rounded"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email o usuario"
+          value={identifier}
+          onChange={(e) => setIdentifier(e.target.value)}
           required
         />
 

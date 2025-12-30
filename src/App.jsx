@@ -7,6 +7,7 @@ import EditRecipe from './pages/EditRecipe'
 import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import MyRecipes from './pages/MyRecipes'
 
 const App = () => {
   return (
@@ -27,6 +28,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <NewRecipe />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/mis-recetas"
+            element={
+              <ProtectedRoute>
+                <MyRecipes />
               </ProtectedRoute>
             }
           />

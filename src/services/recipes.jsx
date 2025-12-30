@@ -6,6 +6,16 @@ export const getRecipes = async () => {
   return res.json()
 }
 
+export const getMyRecipes = async () => {
+  const res = await fetch(`${API_URL}/recipes/mine`, {
+    headers: {
+      ...getAuthHeaders()
+    }
+  })
+  if (!res.ok) throw new Error('Error cargando recetas')
+  return res.json()
+}
+
 export const createRecipe = async (data) => {
   const response = await fetch(`${API_URL}/recipes`, {
     method: 'POST',
