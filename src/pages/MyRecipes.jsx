@@ -23,16 +23,21 @@ const MyRecipes = () => {
   }, [])
 
   if (loading) {
-    return <p className="text-center mt-20">Cargando recetas...</p>
+    return <p className="mt-20 text-center text-[var(--muted)]">Cargando recetas...</p>
   }
 
   if (error) {
-    return <p className="text-center mt-20 text-red-500">{error}</p>
+    return <p className="mt-20 text-center text-red-300">{error}</p>
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Mis recetas</h2>
+    <main className="page-fade py-2">
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold">Mis recetas</h2>
+        <p className="mt-2 text-sm text-[var(--muted)]">
+          Solo ves las recetas creadas por tu usuario.
+        </p>
+      </div>
       <RecipeGrid recipes={recipes} onSelectRecipe={() => {}} />
     </main>
   )

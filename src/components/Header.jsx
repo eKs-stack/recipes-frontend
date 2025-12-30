@@ -1,37 +1,40 @@
-import { ChefHat, Plus, LogOut } from 'lucide-react'
+import { Plus, LogOut } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/useAuth'
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth()
   return (
-    <header className="bg-card/80 backdrop-blur-xl border-b border-border/50 sticky top-0 z-40">
+    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[rgba(15,20,28,0.9)] backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2.5">
-            <div className="bg-primary/10 p-2 rounded-lg">
-              <ChefHat className="h-5 w-5 text-primary" />
-            </div>
-            <span className="text-lg font-semibold tracking-tight text-foreground">
-              Cocinar con Aleks
-            </span>
+        <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center">
+          <div className="justify-self-start text-sm font-medium text-[var(--text)]">
+            Cocina Hristov
           </div>
 
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/">Home</Link>
+          <nav className="hidden justify-self-center md:flex items-center gap-6 text-sm text-[var(--muted)]">
+            <Link to="/" className="hover:text-[var(--text)]">
+              Home
+            </Link>
 
-            {isAuthenticated && <Link to="/mis-recetas">Mis recetas</Link>}
+            {isAuthenticated && (
+              <Link to="/favoritos" className="hover:text-[var(--text)]">
+                Favoritos
+              </Link>
+            )}
+
+            {isAuthenticated && (
+              <Link to="/mis-recetas" className="hover:text-[var(--text)]">
+                Mis recetas
+              </Link>
+            )}
           </nav>
 
           {isAuthenticated ? (
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">
-                Hola {user.username}
-              </span>
-
+            <div className="justify-self-end flex items-center gap-4">
               <Link
                 to="/new"
-                className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
+                className="flex items-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black shadow-[0_0_0_1px_rgba(245,158,11,0.15)] transition-colors hover:bg-amber-400"
               >
                 <Plus className="h-4 w-4" />
                 <span>Nueva receta</span>
@@ -39,16 +42,23 @@ export default function Header() {
 
               <button
                 onClick={logout}
-                className="flex items-center gap-2 text-sm text-destructive hover:underline"
+                className="flex items-center gap-2 text-sm text-[var(--danger)] hover:text-red-300"
               >
                 <LogOut className="h-4 w-4" />
                 Salir
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-4">
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+            <div className="justify-self-end flex items-center gap-4 text-sm text-[var(--muted)]">
+              <Link to="/login" className="hover:text-[var(--text)]">
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="rounded-full border border-[var(--border)] px-3 py-1.5 text-[var(--text)] hover:border-amber-400 hover:text-amber-300"
+              >
+                Register
+              </Link>
             </div>
           )}
         </div>

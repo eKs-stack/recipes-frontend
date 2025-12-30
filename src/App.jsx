@@ -8,51 +8,53 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import MyRecipes from './pages/MyRecipes'
+import Favorites from './pages/Favorites'
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="w-full mx-auto p-4">
+      <div className="min-h-screen">
         <Header />
-      </div>
 
-      <div className="max-w-6xl mx-auto p-4">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/favoritos" element={<Favorites />} />
 
-          {/* 🔐 ruta protegida */}
-          <Route
-            path="/new"
-            element={
-              <ProtectedRoute>
-                <NewRecipe />
-              </ProtectedRoute>
-            }
-          />
+            {/* 🔐 ruta protegida */}
+            <Route
+              path="/new"
+              element={
+                <ProtectedRoute>
+                  <NewRecipe />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/mis-recetas"
-            element={
-              <ProtectedRoute>
-                <MyRecipes />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/mis-recetas"
+              element={
+                <ProtectedRoute>
+                  <MyRecipes />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route path="/recipes/:id" element={<RecipeDetail />} />
+            <Route path="/recipes/:id" element={<RecipeDetail />} />
 
-          {/* (opcional) también deberías proteger editar */}
-          <Route
-            path="/recipes/:id/edit"
-            element={
-              <ProtectedRoute>
-                <EditRecipe />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+            {/* (opcional) también deberías proteger editar */}
+            <Route
+              path="/recipes/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditRecipe />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   )

@@ -31,21 +31,26 @@ const RecipeDetail = () => {
 
   const isOwner = Boolean(isAuthenticated && userId && ownerId === userId)
 
-  if (loading) return <p>Cargando...</p>
-  if (error) return <p>{error}</p>
-  if (!recipe) return <p>Receta no encontrada</p>
+  if (loading) return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
+  if (error) return <p className="mt-20 text-center text-red-300">{error}</p>
+  if (!recipe)
+    return (
+      <p className="mt-20 text-center text-[var(--muted)]">
+        Receta no encontrada
+      </p>
+    )
 
   return (
-    <div className="space-y-6 mt-6">
+    <div className="page-fade mx-auto mt-8 max-w-3xl space-y-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)]">
       <div>
-        <h2 className="text-3xl font-bold mb-2">{recipe.title}</h2>
+        <h2 className="mb-2 text-3xl font-semibold">{recipe.title}</h2>
 
-        <p className="text-gray-700">{recipe.description}</p>
+        <p className="text-[var(--muted)]">{recipe.description}</p>
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold mb-2">Ingredientes</h3>
-        <ul className="list-disc list-inside space-y-1 text-gray-800">
+        <h3 className="mb-2 text-xl font-semibold">Ingredientes</h3>
+        <ul className="list-disc list-inside space-y-1 text-[var(--text)]">
           {recipe.ingredients.map((ing, index) => (
             <li key={index}>{ing}</li>
           ))}
@@ -53,22 +58,24 @@ const RecipeDetail = () => {
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold mb-2">Pasos</h3>
-        <p className="text-gray-800 whitespace-pre-line">{recipe.steps}</p>
+        <h3 className="mb-2 text-xl font-semibold">Pasos</h3>
+        <p className="whitespace-pre-line text-[var(--text)]">{recipe.steps}</p>
       </div>
 
-      <div className="flex items-center justify-between pt-4 border-t">
-        <p className="font-medium">⏱ {recipe.prepTime} minutos</p>
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border)] pt-4">
+        <p className="text-sm font-medium text-[var(--muted)]">
+          ⏱ {recipe.prepTime} minutos
+        </p>
         {isOwner && (
           <Link
             to={`/recipes/${recipe._id}/edit`}
-            className="text-blue-600 hover:underline"
+            className="text-sm text-amber-300 hover:text-amber-200"
           >
             Editar receta
           </Link>
         )}
 
-        <Link to="/" className="text-blue-600 hover:underline">
+        <Link to="/" className="text-sm text-amber-300 hover:text-amber-200">
           ← Volver
         </Link>
       </div>

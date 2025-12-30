@@ -42,11 +42,13 @@ const NewRecipe = () => {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-6">
-      <h2 className="text-2xl font-bold mb-6">Nueva receta</h2>
+    <div className="page-fade mx-auto mt-8 max-w-2xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)]">
+      <h2 className="mb-6 text-2xl font-semibold">Nueva receta</h2>
 
       {error && (
-        <div className="bg-red-100 text-red-700 p-2 rounded mb-4">{error}</div>
+        <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+          {error}
+        </div>
       )}
 
       <RecipeForm
