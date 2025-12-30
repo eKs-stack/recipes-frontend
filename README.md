@@ -8,7 +8,7 @@ CRUD completo.
 ## Enlaces de entrega
 
 - Repo: https://github.com/eKs-stack/recipes-frontend
-- Deploy (Vercel): https://recipes-frontend-git-main-aleks-projects-3bbc309b.vercel.app?_vercel_share=H2Tmr7e5ZLmdEtHITVoclWoXXw3j1Ka6
+- Deploy (Vercel): https://cocinaconaleks-ten.vercel.app/
 
 ## Tecnologias
 
