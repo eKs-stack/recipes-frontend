@@ -10,7 +10,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between gap-3 md:grid md:grid-cols-[1fr_auto_1fr]">
           <Link
             to="/"
-            className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-amber-300 sm:max-w-none sm:text-base"
+            className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-white sm:max-w-none sm:text-base"
           >
             Cocina Hristov
           </Link>
@@ -37,7 +37,7 @@ export default function Header() {
             <div className="flex items-center gap-2 justify-self-end sm:gap-4">
               <Link
                 to="/new"
-                className="flex items-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-black shadow-[0_0_0_1px_rgba(245,158,11,0.15)] transition-colors hover:bg-amber-400 sm:px-4 sm:py-2 sm:text-sm"
+                className="flex items-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-[var(--bg-0)] shadow-[0_0_0_1px_rgba(255,255,255,0.15)] transition-colors hover:bg-white/90 sm:px-4 sm:py-2 sm:text-sm"
               >
                 <Plus className="h-4 w-4" />
                 <span>Nueva receta</span>
@@ -45,7 +45,7 @@ export default function Header() {
 
               <button
                 onClick={logout}
-                className="flex items-center gap-2 text-xs text-[var(--danger)] hover:text-red-300 sm:text-sm"
+                className="flex items-center gap-2 text-xs text-[var(--danger)] hover:text-white/80 sm:text-sm"
               >
                 <LogOut className="h-4 w-4" />
                 Salir
@@ -58,7 +58,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/register"
-                className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[var(--text)] transition hover:border-amber-400 hover:text-amber-300 sm:px-3 sm:py-1.5"
+                className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[var(--text)] transition hover:border-white hover:text-white sm:px-3 sm:py-1.5"
               >
                 Register
               </Link>

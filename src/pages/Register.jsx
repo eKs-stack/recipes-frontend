@@ -45,14 +45,14 @@ const Register = () => {
       </p>
 
       {error && (
-        <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+        <div className="mb-4 rounded-lg border border-white/30 bg-white/10 p-3 text-sm text-white">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-white focus:ring-2 focus:ring-white/20"
           placeholder="Nombre de usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -61,7 +61,7 @@ const Register = () => {
 
         <input
           type="email"
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-white focus:ring-2 focus:ring-white/20"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -70,21 +70,21 @@ const Register = () => {
 
         <input
           type="password"
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-white focus:ring-2 focus:ring-white/20"
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <button className="w-full rounded-lg bg-[var(--accent)] py-2.5 text-sm font-semibold text-black transition hover:bg-amber-400">
+        <button className="w-full rounded-lg bg-[var(--accent)] py-2.5 text-sm font-semibold text-[var(--bg-0)] transition hover:bg-white/90">
           Crear cuenta
         </button>
       </form>
 
       <p className="mt-4 text-sm text-[var(--muted)]">
         ¿Ya tienes cuenta?{' '}
-        <Link to="/login" className="text-amber-300 hover:text-amber-200">
+        <Link to="/login" className="text-white hover:text-white/80">
           Login
         </Link>
       </p>

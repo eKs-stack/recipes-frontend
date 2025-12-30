@@ -46,7 +46,7 @@ const NewRecipe = () => {
       <h2 className="mb-6 text-2xl font-semibold">Nueva receta</h2>
 
       {error && (
-        <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+        <div className="mb-4 rounded-lg border border-white/30 bg-white/10 p-3 text-sm text-white">
           {error}
         </div>
       )}

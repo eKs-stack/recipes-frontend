@@ -29,7 +29,7 @@ export default function Home() {
   }
 
   if (error) {
-    return <p className="mt-20 text-center text-red-300">{error}</p>
+    return <p className="mt-20 text-center text-white">{error}</p>
   }
 
   return (

@@ -21,7 +21,7 @@ const RecipeCard = ({ recipe }) => {
   }
 
   return (
-    <div className="group relative block overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-300 hover:border-amber-400/60 hover:bg-[var(--card-strong)]">
+    <div className="group relative block overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-300 hover:border-white/60 hover:bg-[var(--card-strong)]">
       <button
         type="button"
         aria-pressed={favorite}
@@ -39,14 +39,14 @@ const RecipeCard = ({ recipe }) => {
           !isAuthenticated
             ? 'cursor-not-allowed border-[var(--border)] bg-[var(--card-strong)] text-[var(--muted)] opacity-60'
             : favorite
-              ? 'border-amber-400/60 bg-amber-400 text-black'
-              : 'border-[var(--border)] bg-[var(--card-strong)] text-[var(--muted)] hover:border-amber-400 hover:text-amber-300'
+              ? 'border-white/60 bg-white text-[var(--bg-0)]'
+              : 'border-[var(--border)] bg-[var(--card-strong)] text-[var(--muted)] hover:border-white hover:text-white'
         }`}
       >
         <Heart className="h-4 w-4" fill={favorite ? 'currentColor' : 'none'} />
       </button>
       <Link to={`/recipes/${recipe._id}`} className="block p-4">
-        <h3 className="mb-2 line-clamp-1 text-base font-semibold text-[var(--text)] transition-colors group-hover:text-amber-300">
+        <h3 className="mb-2 line-clamp-1 text-base font-semibold text-[var(--text)] transition-colors group-hover:text-white">
           {recipe.title}
         </h3>
 
@@ -66,7 +66,7 @@ const RecipeCard = ({ recipe }) => {
         <div className="px-4 pb-4">
           <Link
             to={`/recipes/${recipe._id}/edit`}
-            className="text-sm text-amber-300 hover:text-amber-200"
+            className="text-sm text-white hover:text-white/80"
           >
             Editar
           </Link>

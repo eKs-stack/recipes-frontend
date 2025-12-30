@@ -43,7 +43,7 @@ const Login = () => {
       </p>
 
       {error && (
-        <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+        <div className="mb-4 rounded-lg border border-white/30 bg-white/10 p-3 text-sm text-white">
           {error}
         </div>
       )}
@@ -51,7 +51,7 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-white focus:ring-2 focus:ring-white/20"
           placeholder="Email o usuario"
           value={identifier}
           onChange={(e) => setIdentifier(e.target.value)}
@@ -60,21 +60,21 @@ const Login = () => {
 
         <input
           type="password"
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-white focus:ring-2 focus:ring-white/20"
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <button className="w-full rounded-lg bg-[var(--accent)] py-2.5 text-sm font-semibold text-black transition hover:bg-amber-400">
+        <button className="w-full rounded-lg bg-[var(--accent)] py-2.5 text-sm font-semibold text-[var(--bg-0)] transition hover:bg-white/90">
           Entrar
         </button>
       </form>
 
       <p className="mt-4 text-sm text-[var(--muted)]">
         ¿No tienes cuenta?{' '}
-        <Link to="/register" className="text-amber-300 hover:text-amber-200">
+        <Link to="/register" className="text-white hover:text-white/80">
           Regístrate
         </Link>
       </p>

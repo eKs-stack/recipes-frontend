@@ -8,11 +8,11 @@
   --card: #0f141c;
   --card-strong: #151c27;
   --border: #1f2937;
-  --text: #e6eaf0;
-  --muted: #9aa4b2;
-  --accent: #f59e0b;
-  --accent-2: #22c55e;
-  --danger: #ef4444;
+  --text: #ffffff;
+  --muted: #ffffff;
+  --accent: #ffffff;
+  --accent-2: #ffffff;
+  --danger: #ffffff;
   --app-bg:
     linear-gradient(180deg, var(--bg-0), var(--bg-1));
 }
