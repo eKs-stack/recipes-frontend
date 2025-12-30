@@ -1,26 +1,40 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FavoritesContext } from './FavoritesContext'
+import { useAuth } from './useAuth'
 
-const STORAGE_KEY = 'favoriteRecipes'
+const STORAGE_KEY_PREFIX = 'favoriteRecipes'
 
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (!stored) return []
-    try {
-      const parsed = JSON.parse(stored)
-      return Array.isArray(parsed) ? parsed : []
-    } catch {
-      return []
-    }
-  })
+  const { user, isAuthenticated } = useAuth()
+  const userId = user?.id || user?._id || null
+  const storageKey = userId ? `${STORAGE_KEY_PREFIX}:${userId}` : null
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites))
-  }, [favorites])
+    if (!storageKey || !isAuthenticated) {
+      setFavorites([])
+      return
+    }
+    const stored = localStorage.getItem(storageKey)
+    if (!stored) {
+      setFavorites([])
+      return
+    }
+    try {
+      const parsed = JSON.parse(stored)
+      setFavorites(Array.isArray(parsed) ? parsed : [])
+    } catch {
+      setFavorites([])
+    }
+  }, [storageKey, isAuthenticated])
+
+  useEffect(() => {
+    if (!storageKey || !isAuthenticated) return
+    localStorage.setItem(storageKey, JSON.stringify(favorites))
+  }, [favorites, storageKey, isAuthenticated])
 
   const toggleFavorite = (id) => {
-    if (!id) return
+    if (!id || !storageKey || !isAuthenticated) return
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     )

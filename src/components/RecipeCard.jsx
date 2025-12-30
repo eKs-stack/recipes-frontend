@@ -11,7 +11,7 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
   const ownerId =
     typeof recipe.owner === 'string' ? recipe.owner : recipe.owner?._id
   const isOwner = Boolean(isAuthenticated && userId && ownerId === userId)
-  const favorite = isFavorite(recipe._id)
+  const favorite = isAuthenticated ? isFavorite(recipe._id) : false
   const servingsValue = recipe.servings ?? null
   const servingsLabel =
     servingsValue !== null
