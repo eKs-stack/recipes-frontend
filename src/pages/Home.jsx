@@ -56,10 +56,19 @@ export default function Home() {
   }
 
   const normalizedSearch = normalizeText(searchTerm.trim())
+  const normalizedActiveCategory = normalizeText(activeCategory)
+  const baseCategories = categoryOptions.filter(
+    (category) => category !== 'Todas' && category !== 'Otro'
+  )
+  const normalizedBaseCategories = baseCategories.map(normalizeText)
   const filteredRecipes = recipes.filter((recipe) => {
     const title = normalizeText(recipe.title)
     const description = normalizeText(recipe.description)
     const category = normalizeText(recipe.category)
+    const isCustomCategory =
+      category &&
+      !normalizedBaseCategories.includes(category) &&
+      category !== normalizeText('Otro')
     const matchesSearch = normalizedSearch
       ? title.includes(normalizedSearch) ||
         description.includes(normalizedSearch) ||
@@ -67,8 +76,10 @@ export default function Home() {
       : true
 
     const matchesCategory =
-      activeCategory === 'Todas' ||
-      category === normalizeText(activeCategory)
+      normalizedActiveCategory === normalizeText('Todas') ||
+      (normalizedActiveCategory === normalizeText('Otro')
+        ? category === normalizeText('Otro') || isCustomCategory
+        : category === normalizedActiveCategory)
 
     return matchesSearch && matchesCategory
   })
