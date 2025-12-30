@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Clock, Heart, Tag, Users } from 'lucide-react'
+import { Clock, Heart, Users } from 'lucide-react'
 import { useAuth } from '../context/useAuth'
 import { useFavorites } from '../context/useFavorites'
 
@@ -18,6 +18,19 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
       ? `${servingsValue} porcion${servingsValue === 1 ? '' : 'es'}`
       : 'Sin porciones'
   const categoryLabel = recipe.category || 'Sin categoría'
+  const difficultyLabel = recipe.difficulty || 'Sin dificultad'
+  const difficultyKey = (recipe.difficulty || '').toString().toLowerCase()
+  const difficultyTone =
+    difficultyKey === 'fácil' || difficultyKey === 'facil'
+      ? 'text-[var(--success)]'
+      : difficultyKey === 'media'
+        ? 'text-[var(--warning)]'
+        : difficultyKey === 'difícil' || difficultyKey === 'dificil'
+          ? 'text-[var(--danger)]'
+          : 'text-[var(--muted)]'
+  const categoryTone = recipe.category
+    ? 'text-[var(--accent)]'
+    : 'text-[var(--muted)]'
 
   const handleToggleFavorite = (event) => {
     event.preventDefault()
@@ -27,7 +40,7 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
   }
 
   return (
-    <div className="group relative block overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--card-strong)]">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--card-strong)]">
       <button
         type="button"
         aria-pressed={favorite}
@@ -51,16 +64,21 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
       >
         <Heart className="h-4 w-4" fill={favorite ? 'currentColor' : 'none'} />
       </button>
-      <Link to={`/recipes/${recipe._id}`} className="block p-4">
-        <h3 className="mb-2 line-clamp-1 text-base font-semibold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+      <Link to={`/recipes/${recipe._id}`} className="flex flex-1 flex-col p-4">
+        <div className="mb-3 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.08em]">
+          <span className={categoryTone}>{categoryLabel}</span>
+          <span className="text-[var(--muted)]">•</span>
+          <span className={difficultyTone}>{difficultyLabel}</span>
+        </div>
+        <h3 className="mb-2 min-h-[1.5rem] line-clamp-1 text-base font-semibold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
           {recipe.title}
         </h3>
 
-        <p className="mb-4 line-clamp-2 text-sm text-[var(--muted)]">
+        <p className="mb-4 min-h-[2.5rem] line-clamp-2 text-sm text-[var(--muted)]">
           {recipe.description}
         </p>
 
-        <div className="flex items-center gap-4 text-xs text-[var(--muted)]">
+        <div className="mt-auto flex items-center gap-4 text-xs text-[var(--muted)]">
           <div className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" />
             <span>{recipe.prepTime} min</span>
@@ -69,10 +87,6 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
             <Users className="h-3.5 w-3.5" />
             <span>{servingsLabel}</span>
           </div>
-        </div>
-        <div className="mt-2 flex items-center gap-1.5 text-xs text-[var(--muted)]">
-          <Tag className="h-3.5 w-3.5" />
-          <span>{categoryLabel}</span>
         </div>
       </Link>
 

@@ -4,8 +4,13 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/useAuth'
 
 export default function Header() {
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated, logout, user } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const displayName =
+    user?.name || user?.username || user?.email || 'chef'
+  const brandLabel = isAuthenticated
+    ? `Hola ${displayName}`
+    : 'Cocina Hristov'
 
   const toggleMobile = () => {
     setMobileOpen((prev) => !prev)
@@ -27,7 +32,7 @@ export default function Header() {
             to="/"
             className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-[var(--accent)] sm:max-w-none sm:text-base"
           >
-            Cocina Hristov
+            {brandLabel}
           </Link>
 
           <nav className="hidden justify-self-center md:flex items-center gap-6 text-sm text-[var(--muted)]">
