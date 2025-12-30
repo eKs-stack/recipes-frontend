@@ -3,6 +3,13 @@
 Frontend en React + Vite para consumir la API de recetas con autenticacion y
 CRUD completo.
 
+---
+
+## Enlaces de entrega
+
+- Repo: https://github.com/eKs-stack/recipes-frontend
+- Deploy (Vercel): https://recipes-frontend-git-main-aleks-projects-3bbc309b.vercel.app?_vercel_share=H2Tmr7e5ZLmdEtHITVoclWoXXw3j1Ka6
+
 ## Tecnologias
 
 - React 19
@@ -35,6 +42,24 @@ VITE_API_URL=http://localhost:3000/api
 
 Si no defines `VITE_API_URL`, el frontend usa por defecto:
 `https://recipes-backend-d7dm.onrender.com/api`.
+
+---
+
+## Deploy (Vercel)
+
+1. Importa el repo en Vercel.
+2. Configura:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+3. Variables de entorno:
+   - `VITE_API_URL=https://<tu-servicio>.onrender.com/api`
+4. Despliega. Vercel detecta Vite automaticamente.
+
+---
+
+## Backend en Render
+
+El frontend necesita apuntar al backend desplegado en Render usando `VITE_API_URL`.
 
 ## Endpoints usados
 
