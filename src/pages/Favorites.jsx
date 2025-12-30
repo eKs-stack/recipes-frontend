@@ -55,7 +55,7 @@ const Favorites = () => {
   }
 
   if (error) {
-    return <p className="mt-20 text-center text-white">{error}</p>
+    return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
 
   if (favorites.length === 0) {
@@ -73,7 +73,7 @@ const Favorites = () => {
           </p>
           <Link
             to="/"
-            className="mt-4 inline-flex items-center justify-center rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--text)] transition hover:border-white hover:text-white"
+            className="mt-4 inline-flex items-center justify-center rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             Ver recetas
           </Link>

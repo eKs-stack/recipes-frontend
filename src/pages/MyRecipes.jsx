@@ -27,7 +27,7 @@ const MyRecipes = () => {
   }
 
   if (error) {
-    return <p className="mt-20 text-center text-white">{error}</p>
+    return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
 
   return (

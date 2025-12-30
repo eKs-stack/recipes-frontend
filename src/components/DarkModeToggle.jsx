@@ -22,7 +22,7 @@ const DarkModeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-lg border border-[var(--border)] bg-[var(--card-strong)] px-3 py-2 text-sm text-[var(--text)] transition hover:border-white"
+      className="rounded-lg border border-[var(--border)] bg-[var(--card-strong)] px-3 py-2 text-sm text-[var(--text)] transition hover:border-[var(--accent)]"
     >
       {dark ? '☀️' : '🌙'}
     </button>

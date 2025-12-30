@@ -32,7 +32,7 @@ const RecipeDetail = () => {
   const isOwner = Boolean(isAuthenticated && userId && ownerId === userId)
 
   if (loading) return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
-  if (error) return <p className="mt-20 text-center text-white">{error}</p>
+  if (error) return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   if (!recipe)
     return (
       <p className="mt-20 text-center text-[var(--muted)]">
@@ -86,13 +86,16 @@ const RecipeDetail = () => {
         {isOwner && (
           <Link
             to={`/recipes/${recipe._id}/edit`}
-            className="text-sm text-white hover:text-white/80"
+            className="text-sm text-[var(--accent)] hover:text-[var(--accent-2)]"
           >
             Editar receta
           </Link>
         )}
 
-        <Link to="/" className="text-sm text-white hover:text-white/80">
+        <Link
+          to="/"
+          className="text-sm text-[var(--accent)] hover:text-[var(--accent-2)]"
+        >
           ← Volver
         </Link>
       </div>

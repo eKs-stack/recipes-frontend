@@ -87,7 +87,7 @@ const EditRecipe = () => {
       <h2 className="mb-6 text-2xl font-semibold">Editar receta</h2>
 
       {error && (
-        <div className="mb-4 rounded-lg border border-white/30 bg-white/10 p-3 text-sm text-white">
+        <div className="mb-4 rounded-lg border border-[var(--danger-border)] bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger)]">
           {error}
         </div>
       )}
@@ -117,7 +117,7 @@ const EditRecipe = () => {
       <button
         type="button"
         onClick={handleDelete}
-        className="mt-4 w-full rounded-lg border border-white/40 bg-white/10 py-2.5 text-sm font-semibold text-white transition hover:bg-white/20"
+        className="mt-4 w-full rounded-lg border border-[var(--danger-border)] bg-[var(--danger-soft)] py-2.5 text-sm font-semibold text-[var(--danger)] transition hover:bg-[var(--danger-strong)] hover:text-white"
       >
         Eliminar receta
       </button>

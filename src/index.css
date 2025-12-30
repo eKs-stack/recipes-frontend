@@ -4,15 +4,20 @@
 
 :root {
   --bg-0: #0b0f14;
-  --bg-1: #0f1721;
-  --card: #0f141c;
-  --card-strong: #151c27;
-  --border: #1f2937;
-  --text: #ffffff;
-  --muted: #ffffff;
-  --accent: #ffffff;
-  --accent-2: #ffffff;
-  --danger: #ffffff;
+  --bg-1: #0e1622;
+  --card: #111a26;
+  --card-strong: #1a2535;
+  --border: #243247;
+  --text: #e6edf5;
+  --muted: #9aa6b2;
+  --accent: #22d3ee;
+  --accent-2: #0ea5b7;
+  --accent-soft: #22d3ee26;
+  --accent-shadow: rgba(34, 211, 238, 0.55);
+  --danger: #f87171;
+  --danger-strong: #ef4444;
+  --danger-soft: #f8717126;
+  --danger-border: #f871714d;
   --app-bg:
     linear-gradient(180deg, var(--bg-0), var(--bg-1));
 }

@@ -25,7 +25,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between gap-3 md:grid md:grid-cols-[1fr_auto_1fr]">
           <Link
             to="/"
-            className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-white sm:max-w-none sm:text-base"
+            className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-[var(--accent)] sm:max-w-none sm:text-base"
           >
             Cocina Hristov
           </Link>
@@ -52,7 +52,7 @@ export default function Header() {
             <div className="hidden items-center gap-2 justify-self-end sm:gap-4 md:flex">
               <Link
                 to="/new"
-                className="flex items-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-[var(--bg-0)] shadow-[0_0_0_1px_rgba(255,255,255,0.15)] transition-colors hover:bg-white/90 sm:px-4 sm:py-2 sm:text-sm"
+                className="flex items-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-[var(--bg-0)] shadow-[0_0_0_1px_var(--accent-soft)] transition-colors hover:bg-[var(--accent-2)] sm:px-4 sm:py-2 sm:text-sm"
               >
                 <Plus className="h-4 w-4" />
                 <span>Nueva receta</span>
@@ -60,7 +60,7 @@ export default function Header() {
 
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 text-xs text-[var(--danger)] hover:text-white/80 sm:text-sm"
+                className="flex items-center gap-2 text-xs text-[var(--danger)] hover:text-[var(--danger-strong)] sm:text-sm"
               >
                 <LogOut className="h-4 w-4" />
                 Salir
@@ -73,7 +73,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/register"
-                className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[var(--text)] transition hover:border-white hover:text-white sm:px-3 sm:py-1.5"
+                className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)] sm:px-3 sm:py-1.5"
               >
                 Register
               </Link>
@@ -85,7 +85,7 @@ export default function Header() {
             aria-label={mobileOpen ? 'Cerrar menu' : 'Abrir menu'}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
-            className="inline-flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-2 text-[var(--text)] transition hover:border-white md:hidden"
+            className="inline-flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-2 text-[var(--text)] transition hover:border-[var(--accent)] md:hidden"
           >
             {mobileOpen ? (
               <X className="h-4 w-4" />
@@ -103,7 +103,7 @@ export default function Header() {
               <Link
                 to="/"
                 onClick={closeMobile}
-                className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-white"
+                className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-[var(--accent)]"
               >
                 Home
               </Link>
@@ -111,7 +111,7 @@ export default function Header() {
                 <Link
                   to="/favoritos"
                   onClick={closeMobile}
-                  className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-white"
+                  className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-[var(--accent)]"
                 >
                   Favoritos
                 </Link>
@@ -120,7 +120,7 @@ export default function Header() {
                 <Link
                   to="/mis-recetas"
                   onClick={closeMobile}
-                  className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-white"
+                  className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-[var(--accent)]"
                 >
                   Mis recetas
                 </Link>
@@ -132,7 +132,7 @@ export default function Header() {
                   <Link
                     to="/new"
                     onClick={closeMobile}
-                    className="flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-[var(--bg-0)] shadow-[0_0_0_1px_rgba(255,255,255,0.15)] transition-colors hover:bg-white/90"
+                    className="flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-[var(--bg-0)] shadow-[0_0_0_1px_var(--accent-soft)] transition-colors hover:bg-[var(--accent-2)]"
                   >
                     <Plus className="h-4 w-4" />
                     <span>Nueva receta</span>
@@ -140,7 +140,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-[var(--border)] px-3 py-2 text-xs font-semibold text-[var(--danger)] transition hover:border-white hover:text-white"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-[var(--border)] px-3 py-2 text-xs font-semibold text-[var(--danger)] transition hover:border-[var(--danger)] hover:text-[var(--danger-strong)]"
                   >
                     <LogOut className="h-4 w-4" />
                     Salir
@@ -151,14 +151,14 @@ export default function Header() {
                   <Link
                     to="/login"
                     onClick={closeMobile}
-                    className="flex items-center justify-center rounded-lg border border-[var(--border)] px-3 py-2 text-xs font-semibold text-[var(--text)] transition hover:border-white hover:text-white"
+                    className="flex items-center justify-center rounded-lg border border-[var(--border)] px-3 py-2 text-xs font-semibold text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
                     onClick={closeMobile}
-                    className="flex items-center justify-center rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-[var(--bg-0)] transition hover:bg-white/90"
+                    className="flex items-center justify-center rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-[var(--bg-0)] transition hover:bg-[var(--accent-2)]"
                   >
                     Register
                   </Link>

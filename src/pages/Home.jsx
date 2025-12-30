@@ -15,6 +15,7 @@ export default function Home() {
   const categoryOptions = [
     'Todas',
     'Principal',
+    'Desayuno',
     'Acompañamiento',
     'Entrante',
     'Postre',
@@ -51,7 +52,7 @@ export default function Home() {
   }
 
   if (error) {
-    return <p className="mt-20 text-center text-white">{error}</p>
+    return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
 
   const normalizedSearch = normalizeText(searchTerm.trim())
@@ -103,8 +104,8 @@ export default function Home() {
                 onClick={() => setActiveCategory(category)}
                 className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
                   isActive
-                    ? 'bg-white text-[var(--bg-0)] shadow-[0_12px_30px_-18px_rgba(255,255,255,0.8)]'
-                    : 'bg-[var(--card-strong)] text-[var(--muted)] hover:text-white'
+                    ? 'bg-[var(--accent)] text-[var(--bg-0)] shadow-[0_12px_30px_-18px_var(--accent-shadow)]'
+                    : 'bg-[var(--card-strong)] text-[var(--muted)] hover:text-[var(--accent)]'
                 }`}
               >
                 {category}
