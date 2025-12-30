@@ -17,12 +17,14 @@ CRUD completo.
 - React Router
 - Tailwind CSS
 - Axios
+- SweetAlert2
 
 ## Funcionalidades
 
 - Registro e inicio de sesion (token en localStorage)
 - Rutas protegidas para crear y editar recetas
 - Listado, detalle, creacion, edicion y borrado de recetas
+- Gestión de errores y confirmaciones con SweetAlert2
 
 ## Instalacion y ejecucion
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getRecipeById } from '../services/recipes'
 import { useAuth } from '../context/useAuth'
+import { showError } from '../utils/alerts'
 
 const RecipeDetail = () => {
   const { id } = useParams()
@@ -21,6 +22,7 @@ const RecipeDetail = () => {
         setRecipe(data)
       } catch {
         setError('No se pudo cargar la receta')
+        showError('No se pudo cargar la receta')
       } finally {
         setLoading(false)
       }

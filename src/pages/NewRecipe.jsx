@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createRecipe } from '../services/recipes'
 import RecipeForm from '../components/RecipeForm'
+import { showError } from '../utils/alerts'
 
 const NewRecipe = () => {
   const navigate = useNavigate()
-  const [error, setError] = useState(null)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [ingredients, setIngredients] = useState('')
@@ -37,19 +37,13 @@ const NewRecipe = () => {
 
       navigate('/')
     } catch {
-      setError('Error creando receta')
+      showError('Error creando receta')
     }
   }
 
   return (
     <div className="page-fade mx-auto mt-8 max-w-2xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)]">
       <h2 className="mb-6 text-2xl font-semibold">Nueva receta</h2>
-
-      {error && (
-        <div className="mb-4 rounded-lg border border-[var(--danger-border)] bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger)]">
-          {error}
-        </div>
-      )}
 
       <RecipeForm
         title={title}

@@ -3,6 +3,7 @@ import { Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { getMyRecipes } from '../services/recipes'
 import RecipeGrid from '../components/RecipeGrid'
+import { showError } from '../utils/alerts'
 
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([])
@@ -16,6 +17,7 @@ const MyRecipes = () => {
         setRecipes(data)
       } catch {
         setError('No se pudieron cargar tus recetas')
+        showError('No se pudieron cargar tus recetas')
       } finally {
         setLoading(false)
       }

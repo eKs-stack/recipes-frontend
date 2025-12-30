@@ -9,6 +9,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import MyRecipes from './pages/MyRecipes'
 import Favorites from './pages/Favorites'
+import Admin from './pages/Admin'
+import AdminRoute from './components/AdminRoute'
 
 const App = () => {
   return (
@@ -23,7 +25,6 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/favoritos" element={<Favorites />} />
 
-            {/* 🔐 ruta protegida */}
             <Route
               path="/new"
               element={
@@ -44,7 +45,15 @@ const App = () => {
 
             <Route path="/recipes/:id" element={<RecipeDetail />} />
 
-            {/* (opcional) también deberías proteger editar */}
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <Admin />
+                </AdminRoute>
+              }
+            />
+
             <Route
               path="/recipes/:id/edit"
               element={

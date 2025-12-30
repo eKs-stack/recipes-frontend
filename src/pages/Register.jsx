@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { registerUser } from '../services/auth'
 import { useAuth } from '../context/useAuth'
+import { showError } from '../utils/alerts'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -10,7 +11,6 @@ const Register = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,14 +26,14 @@ const Register = () => {
       const authUser = data?.user || data?.profile
 
       if (!authToken || !authUser) {
-        setError('Respuesta inválida del servidor de autenticación')
+        showError('Respuesta inválida del servidor de autenticación')
         return
       }
 
       login(authToken, authUser)
       navigate('/')
     } catch {
-      setError('Error al registrar usuario')
+      showError('Error al registrar usuario')
     }
   }
 
@@ -43,12 +43,6 @@ const Register = () => {
       <p className="mb-6 text-sm text-[var(--muted)]">
         Crea una cuenta para guardar tus recetas.
       </p>
-
-      {error && (
-        <div className="mb-4 rounded-lg border border-[var(--danger-border)] bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger)]">
-          {error}
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <input

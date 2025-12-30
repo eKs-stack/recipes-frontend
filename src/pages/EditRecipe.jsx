@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getRecipeById, updateRecipe, deleteRecipe } from '../services/recipes'
 import RecipeForm from '../components/RecipeForm'
+import { confirmDanger, showError } from '../utils/alerts'
 
 const EditRecipe = () => {
   const { id } = useParams()
@@ -12,7 +13,6 @@ const EditRecipe = () => {
   const [ingredients, setIngredients] = useState('')
   const [steps, setSteps] = useState('')
   const [prepTime, setPrepTime] = useState('')
-  const [error, setError] = useState(null)
   const [image, setImage] = useState(null)
   const [category, setCategory] = useState('')
   const [difficulty, setDifficulty] = useState('Fácil')
@@ -35,7 +35,7 @@ const EditRecipe = () => {
         setDifficulty(recipe.difficulty ?? 'Fácil')
         setServings(recipe.servings ?? 1)
       } catch {
-        setError('No se pudo cargar la receta')
+        showError('No se pudo cargar la receta')
       }
     }
 
@@ -43,16 +43,18 @@ const EditRecipe = () => {
   }, [id])
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      '¿Seguro que quieres eliminar esta receta?'
-    )
-    if (!confirmDelete) return
+    const confirmDelete = await confirmDanger({
+      title: 'Eliminar receta',
+      text: '¿Seguro que quieres eliminar esta receta?',
+      confirmButtonText: 'Eliminar'
+    })
+    if (!confirmDelete.isConfirmed) return
 
     try {
       await deleteRecipe(id)
       navigate('/')
     } catch {
-      setError('No se pudo eliminar la receta')
+      showError('No se pudo eliminar la receta')
     }
   }
 
@@ -78,19 +80,13 @@ const EditRecipe = () => {
 
       navigate(`/recipes/${id}`)
     } catch {
-      setError('No se pudo actualizar la receta')
+      showError('No se pudo actualizar la receta')
     }
   }
 
   return (
     <div className="page-fade mx-auto mt-8 max-w-2xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)]">
       <h2 className="mb-6 text-2xl font-semibold">Editar receta</h2>
-
-      {error && (
-        <div className="mb-4 rounded-lg border border-[var(--danger-border)] bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger)]">
-          {error}
-        </div>
-      )}
 
       <RecipeForm
         title={title}

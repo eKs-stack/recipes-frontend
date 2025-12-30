@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getRecipes } from '../services/recipes'
 import RecipeGrid from '../components/RecipeGrid'
 import { useFavorites } from '../context/useFavorites'
+import { showError } from '../utils/alerts'
 
 const Favorites = () => {
   const { favorites } = useFavorites()
@@ -35,6 +36,7 @@ const Favorites = () => {
       } catch {
         if (active) {
           setError('No se pudieron cargar tus favoritos')
+          showError('No se pudieron cargar tus favoritos')
         }
       } finally {
         if (active) {

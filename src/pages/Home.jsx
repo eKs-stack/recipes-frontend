@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 import { getRecipes } from '../services/recipes'
 import RecipeGrid from '../components/RecipeGrid'
+import { showError } from '../utils/alerts'
 
 export default function Home() {
   const [recipes, setRecipes] = useState([])
@@ -39,6 +40,7 @@ export default function Home() {
         setRecipes(data)
       } catch {
         setError('No se pudieron cargar las recetas')
+        showError('No se pudieron cargar las recetas')
       } finally {
         setLoading(false)
       }

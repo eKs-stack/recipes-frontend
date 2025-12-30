@@ -11,6 +11,7 @@ export default function Header() {
   const brandLabel = isAuthenticated
     ? `Hola ${displayName}`
     : 'Cocina Hristov'
+  const isAdmin = user?.role === 'admin'
 
   const toggleMobile = () => {
     setMobileOpen((prev) => !prev)
@@ -33,6 +34,11 @@ export default function Header() {
             className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-[var(--accent)] sm:max-w-none sm:text-base"
           >
             {brandLabel}
+            {isAdmin && (
+              <span className="ml-2 inline-flex items-center rounded-full border border-[var(--accent)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--accent)]">
+                Admin
+              </span>
+            )}
           </Link>
 
           <nav className="hidden justify-self-center md:flex items-center gap-6 text-sm text-[var(--muted)]">
@@ -49,6 +55,12 @@ export default function Header() {
             {isAuthenticated && (
               <Link to="/mis-recetas" className="hover:text-[var(--text)]">
                 Mis recetas
+              </Link>
+            )}
+
+            {isAdmin && (
+              <Link to="/admin" className="hover:text-[var(--text)]">
+                Admin
               </Link>
             )}
           </nav>
@@ -128,6 +140,15 @@ export default function Header() {
                   className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-[var(--accent)]"
                 >
                   Mis recetas
+                </Link>
+              )}
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={closeMobile}
+                  className="block rounded-lg px-3 py-2 transition hover:bg-[var(--card-strong)] hover:text-[var(--accent)]"
+                >
+                  Admin
                 </Link>
               )}
             </nav>
