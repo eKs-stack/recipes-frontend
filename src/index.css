@@ -3,24 +3,48 @@
 @tailwind utilities;
 
 :root {
-  --bg-0: #0b0f14;
-  --bg-1: #0e1622;
-  --card: #111a26;
-  --card-strong: #1a2535;
-  --border: #243247;
-  --text: #e6edf5;
-  --muted: #9aa6b2;
-  --accent: #22d3ee;
-  --accent-2: #0ea5b7;
-  --accent-soft: #22d3ee26;
-  --accent-shadow: rgba(34, 211, 238, 0.55);
-  --success: #34d399;
-  --warning: #fbbf24;
+  --bg-0: #120b06;
+  --bg-1: #1a1209;
+  --card: #1b130c;
+  --card-strong: #22170f;
+  --border: #352417;
+  --text: #f6efe7;
+  --muted: #b8a99a;
+  --accent: #f59e0b;
+  --accent-2: #d97706;
+  --accent-soft: #f59e0b26;
+  --accent-shadow: rgba(245, 158, 11, 0.55);
+  --success: #2fb37b;
+  --warning: #f6c453;
   --danger: #f87171;
   --danger-strong: #ef4444;
   --danger-soft: #f8717126;
   --danger-border: #f871714d;
   --app-bg:
+    radial-gradient(
+      circle at 14% 18%,
+      transparent 0 110px,
+      rgba(245, 158, 11, 0.08) 110px 112px,
+      transparent 114px
+    ),
+    radial-gradient(
+      circle at 86% 22%,
+      transparent 0 140px,
+      rgba(245, 158, 11, 0.07) 140px 142px,
+      transparent 144px
+    ),
+    radial-gradient(
+      circle at 78% 80%,
+      transparent 0 120px,
+      rgba(245, 158, 11, 0.06) 120px 122px,
+      transparent 124px
+    ),
+    radial-gradient(
+      circle at 26% 78%,
+      transparent 0 150px,
+      rgba(245, 158, 11, 0.06) 150px 152px,
+      transparent 154px
+    ),
     linear-gradient(180deg, var(--bg-0), var(--bg-1));
 }
 

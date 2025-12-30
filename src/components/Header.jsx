@@ -25,7 +25,7 @@ export default function Header() {
     closeMobile()
   }
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[rgba(15,20,28,0.9)] backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[rgba(18,11,6,0.92)] backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-3 md:grid md:grid-cols-[1fr_auto_1fr]">
           <Link
