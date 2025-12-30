@@ -40,12 +40,29 @@ const RecipeDetail = () => {
       </p>
     )
 
+  const servingsValue = recipe.servings ?? null
+  const servingsLabel =
+    servingsValue !== null
+      ? `${servingsValue} porcion${servingsValue === 1 ? '' : 'es'}`
+      : 'Sin porciones'
+  const categoryLabel = recipe.category || 'Sin categoría'
+
   return (
     <div className="page-fade mx-auto mt-8 max-w-3xl space-y-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)]">
       <div>
         <h2 className="mb-2 text-3xl font-semibold">{recipe.title}</h2>
 
         <p className="text-[var(--muted)]">{recipe.description}</p>
+        <div className="mt-3 flex flex-wrap gap-4 text-sm text-[var(--muted)]">
+          <span>
+            Categoría:{' '}
+            <span className="text-[var(--text)]">{categoryLabel}</span>
+          </span>
+          <span>
+            Porciones:{' '}
+            <span className="text-[var(--text)]">{servingsLabel}</span>
+          </span>
+        </div>
       </div>
 
       <div>

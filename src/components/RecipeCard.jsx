@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import { Clock, Heart } from 'lucide-react'
+import { Clock, Heart, Tag, Users } from 'lucide-react'
 import { useAuth } from '../context/useAuth'
 import { useFavorites } from '../context/useFavorites'
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, showEdit = true }) => {
   const { user, isAuthenticated } = useAuth()
   const { toggleFavorite, isFavorite } = useFavorites()
 
@@ -12,6 +12,12 @@ const RecipeCard = ({ recipe }) => {
     typeof recipe.owner === 'string' ? recipe.owner : recipe.owner?._id
   const isOwner = Boolean(isAuthenticated && userId && ownerId === userId)
   const favorite = isFavorite(recipe._id)
+  const servingsValue = recipe.servings ?? null
+  const servingsLabel =
+    servingsValue !== null
+      ? `${servingsValue} porcion${servingsValue === 1 ? '' : 'es'}`
+      : 'Sin porciones'
+  const categoryLabel = recipe.category || 'Sin categoría'
 
   const handleToggleFavorite = (event) => {
     event.preventDefault()
@@ -59,10 +65,18 @@ const RecipeCard = ({ recipe }) => {
             <Clock className="h-3.5 w-3.5" />
             <span>{recipe.prepTime} min</span>
           </div>
+          <div className="flex items-center gap-1.5">
+            <Users className="h-3.5 w-3.5" />
+            <span>{servingsLabel}</span>
+          </div>
+        </div>
+        <div className="mt-2 flex items-center gap-1.5 text-xs text-[var(--muted)]">
+          <Tag className="h-3.5 w-3.5" />
+          <span>{categoryLabel}</span>
         </div>
       </Link>
 
-      {isOwner && (
+      {isOwner && showEdit && (
         <div className="px-4 pb-4">
           <Link
             to={`/recipes/${recipe._id}/edit`}

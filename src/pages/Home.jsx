@@ -45,6 +45,7 @@ export default function Home() {
       <RecipeGrid
         recipes={recipes}
         onSelectRecipe={(recipe) => console.log(recipe)}
+        showEdit={false}
       />
     </main>
   )

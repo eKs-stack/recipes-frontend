@@ -20,6 +20,16 @@ const RecipeForm = ({
 }) => {
   const inputClass =
     'w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-white focus:ring-2 focus:ring-white/20'
+  const categoryOptions = [
+    'Principal',
+    'Acompañamiento',
+    'Entrante',
+    'Postre',
+    'Bebida',
+    'Otro'
+  ]
+  const hasCustomCategory =
+    Boolean(category) && !categoryOptions.includes(category)
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -67,12 +77,22 @@ const RecipeForm = ({
         <label className="mb-1 block text-sm font-medium text-[var(--muted)]">
           Categoría
         </label>
-        <input
+        <select
           className={inputClass}
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
-        />
+        >
+          <option value="" disabled>
+            Selecciona una categoría
+          </option>
+          {hasCustomCategory && <option value={category}>{category}</option>}
+          {categoryOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

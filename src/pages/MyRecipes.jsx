@@ -35,7 +35,7 @@ const MyRecipes = () => {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold">Mis recetas</h2>
         <p className="mt-2 text-sm text-[var(--muted)]">
-          Solo ves las recetas creadas por tu usuario.
+          Solo ves las recetas creadas por ti.
         </p>
       </div>
       <RecipeGrid recipes={recipes} onSelectRecipe={() => {}} />
