@@ -38,9 +38,9 @@ export default function Home() {
         <h1 className="text-4xl font-semibold sm:text-5xl">
           Recetas
         </h1>
-        <p className="mt-3 text-base text-[var(--muted)] sm:text-lg">
+        <h2 className="mt-3 text-base text-[var(--muted)] sm:text-lg">
           Explora ideas nuevas y guarda tus favoritas.
-        </p>
+        </h2>
       </div>
       <RecipeGrid
         recipes={recipes}
