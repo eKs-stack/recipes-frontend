@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /login
+Disallow: /register
+Disallow: /admin
+Disallow: /new
+Disallow: /mis-recetas
+Disallow: /favoritos
+Sitemap: https://guardatureceta.com/sitemap.xml
