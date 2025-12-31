@@ -26,7 +26,53 @@ CRUD completo.
 - Listado, detalle, creacion, edicion y borrado de recetas
 - Gestión de errores y confirmaciones con SweetAlert2
 
-## Instalacion y ejecucion
+## Levantar local (Frontend + Backend)
+
+### Backend (API)
+
+1. En otra terminal, entra al repo `recipes-backend` (por ejemplo `../recipes-backend`).
+2. Instala dependencias:
+
+```bash
+npm install
+```
+
+3. Crea `.env` en la raiz:
+
+```env
+PORT=3000
+MONGO_URI=tu_uri_de_mongodb
+JWT_SECRET=tu_secreto_jwt
+```
+
+4. Inicia la API:
+
+```bash
+npm run dev
+```
+
+API en `http://localhost:3000`.
+
+### Frontend (este repo)
+
+1. Crea `.env` en la raiz:
+
+```env
+VITE_API_URL=http://localhost:3000/api
+```
+
+2. Instala y ejecuta:
+
+```bash
+npm install
+npm run dev
+```
+
+App en `http://localhost:5173`.
+
+## Instalacion y ejecucion (solo frontend)
+
+Si ya tienes un backend corriendo o quieres usar el backend remoto:
 
 ```bash
 npm install
