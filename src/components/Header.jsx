@@ -7,7 +7,9 @@ export default function Header() {
   const { isAuthenticated, logout, user } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
   const displayName = user?.name || user?.username || user?.email || 'chef'
-  const brandLabel = isAuthenticated ? `Hola ${displayName}` : 'Guarda tu receta'
+  const brandLabel = isAuthenticated
+    ? `Hola ${displayName}`
+    : 'Guarda tu receta'
   const isAdmin = user?.role === 'admin'
 
   const toggleMobile = () => {
