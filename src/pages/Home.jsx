@@ -109,7 +109,23 @@ export default function Home() {
             className="w-full bg-transparent text-sm text-[var(--text)] placeholder:text-[var(--muted)] outline-none"
           />
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="sm:hidden">
+          <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            Categoría
+          </label>
+          <select
+            value={activeCategory}
+            onChange={(event) => setActiveCategory(event.target.value)}
+            className="w-full rounded-2xl border border-[var(--border)] bg-[var(--card-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]"
+          >
+            {categoryOptions.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="hidden flex-wrap items-center justify-center gap-3 sm:flex">
           {categoryOptions.map((category) => {
             const isActive = activeCategory === category
             return (
