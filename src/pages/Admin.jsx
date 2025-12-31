@@ -65,7 +65,7 @@ const Admin = () => {
       {recipes.length === 0 ? (
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] py-16 text-center">
           <p className="text-sm text-[var(--muted)]">
-            No hay recetas para administrar
+            No hay recetas para administrar.
           </p>
         </div>
       ) : (
