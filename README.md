@@ -8,7 +8,7 @@ CRUD completo.
 ## Enlaces de entrega
 
 - Repo: https://github.com/eKs-stack/recipes-frontend
-- Deploy (Vercel): https://cocinaconaleks-ten.vercel.app/
+- Deploy (Vercel): https://guardatureceta.com/
 
 ## Tecnologias
 
