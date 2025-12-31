@@ -30,9 +30,9 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between gap-3 md:grid md:grid-cols-[1fr_auto_1fr]">
           <Link
             to="/"
-            className="max-w-[45%] justify-self-start truncate text-sm font-medium text-[var(--text)] hover:text-[var(--accent)] sm:max-w-none sm:text-base"
+            className="max-w-[45%] inline-flex items-center gap-2 justify-self-start text-sm font-medium text-[var(--text)] hover:text-[var(--accent)] sm:max-w-none sm:text-base"
           >
-            {brandLabel}
+            <span className="truncate">{brandLabel}</span>
             {isAdmin && (
               <span className="ml-2 inline-flex items-center rounded-full border border-[var(--accent)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--accent)]">
                 Admin
