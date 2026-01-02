@@ -1,6 +1,6 @@
 export const API_URL =
   import.meta.env.VITE_API_URL ||
-  'https://recipes-backend-d7dm.onrender.com/api'
+  'https://recipes-backend-gilt.vercel.app/api'
 
 export const getAuthHeaders = () => {
   const token = localStorage.getItem('token')

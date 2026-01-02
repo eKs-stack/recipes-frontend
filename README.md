@@ -89,7 +89,7 @@ VITE_API_URL=http://localhost:3000/api
 ```
 
 Si no defines `VITE_API_URL`, el frontend usa por defecto:
-`https://recipes-backend-d7dm.onrender.com/api`.
+`https://recipes-backend-gilt.vercel.app/api`.
 
 ---
 
@@ -100,14 +100,14 @@ Si no defines `VITE_API_URL`, el frontend usa por defecto:
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
 3. Variables de entorno:
-   - `VITE_API_URL=https://<tu-servicio>.onrender.com/api`
+   - `VITE_API_URL=https://recipes-backend-gilt.vercel.app/api`
 4. Despliega. Vercel detecta Vite automaticamente.
 
 ---
 
-## Backend en Render
+## Backend en Vercel
 
-El frontend necesita apuntar al backend desplegado en Render usando `VITE_API_URL`.
+El frontend necesita apuntar al backend desplegado en Vercel usando `VITE_API_URL`.
 
 ## Endpoints usados
 
