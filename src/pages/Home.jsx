@@ -49,14 +49,6 @@ export default function Home() {
     loadRecipes()
   }, [])
 
-  if (loading) {
-    return (
-      <p className="mt-20 text-center text-[var(--muted)]">
-        Cargando recetas...
-      </p>
-    )
-  }
-
   if (error) {
     return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
@@ -149,6 +141,7 @@ export default function Home() {
         recipes={filteredRecipes}
         onSelectRecipe={(recipe) => console.log(recipe)}
         showEdit={false}
+        loading={loading}
       />
     </main>
   )

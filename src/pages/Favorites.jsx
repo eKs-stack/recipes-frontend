@@ -52,10 +52,6 @@ const Favorites = () => {
     }
   }, [favorites])
 
-  if (loading) {
-    return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
-  }
-
   if (error) {
     return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
@@ -92,7 +88,11 @@ const Favorites = () => {
           Tus recetas guardadas en un solo lugar.
         </p>
       </div>
-      <RecipeGrid recipes={recipes} onSelectRecipe={() => {}} />
+      <RecipeGrid
+        recipes={recipes}
+        onSelectRecipe={() => {}}
+        loading={loading}
+      />
     </main>
   )
 }

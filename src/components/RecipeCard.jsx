@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Clock, Heart, Users } from 'lucide-react'
 import { useAuth } from '../context/useAuth'
 import { useFavorites } from '../context/useFavorites'
 
-const RecipeCard = ({ recipe, showEdit = true }) => {
+const RecipeCard = ({ recipe, showEdit = true, onClick }) => {
+  const navigate = useNavigate()
   const { user, isAuthenticated } = useAuth()
   const { toggleFavorite, isFavorite } = useFavorites()
 
@@ -39,8 +40,35 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
     toggleFavorite(recipe._id)
   }
 
+  const handleNavigate = () => {
+    if (typeof onClick === 'function') {
+      onClick()
+    }
+    navigate(`/recipes/${recipe._id}`)
+  }
+
+  const handleCardClick = (event) => {
+    if (event.defaultPrevented) return
+    handleNavigate()
+  }
+
+  const handleCardKeyDown = (event) => {
+    if (event.target !== event.currentTarget) return
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      handleNavigate()
+    }
+  }
+
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--card-strong)]">
+    <div
+      role="link"
+      tabIndex={0}
+      aria-label={`Ver receta ${recipe.title}`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--card-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-0)]"
+    >
       <button
         type="button"
         aria-pressed={favorite}
@@ -64,7 +92,7 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
       >
         <Heart className="h-4 w-4" fill={favorite ? 'currentColor' : 'none'} />
       </button>
-      <Link to={`/recipes/${recipe._id}`} className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-4">
         <div className="mb-3 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.08em]">
           <span className={categoryTone}>{categoryLabel}</span>
           <span className="text-[var(--muted)]">•</span>
@@ -88,12 +116,13 @@ const RecipeCard = ({ recipe, showEdit = true }) => {
             <span>{servingsLabel}</span>
           </div>
         </div>
-      </Link>
+      </div>
 
       {isOwner && showEdit && (
         <div className="px-4 pb-4">
           <Link
             to={`/recipes/${recipe._id}/edit`}
+            onClick={(event) => event.stopPropagation()}
             className="text-sm text-[var(--accent)] hover:text-[var(--accent-2)]"
           >
             Editar

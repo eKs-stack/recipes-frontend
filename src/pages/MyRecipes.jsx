@@ -26,14 +26,6 @@ const MyRecipes = () => {
     loadRecipes()
   }, [])
 
-  if (loading) {
-    return (
-      <p className="mt-20 text-center text-[var(--muted)]">
-        Cargando recetas...
-      </p>
-    )
-  }
-
   if (error) {
     return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
@@ -55,7 +47,11 @@ const MyRecipes = () => {
           Nueva receta
         </Link>
       </div>
-      <RecipeGrid recipes={recipes} onSelectRecipe={() => {}} />
+      <RecipeGrid
+        recipes={recipes}
+        onSelectRecipe={() => {}}
+        loading={loading}
+      />
     </main>
   )
 }

@@ -40,10 +40,6 @@ const Admin = () => {
     }
   }
 
-  if (loading) {
-    return <p className="mt-20 text-center text-[var(--muted)]">Cargando...</p>
-  }
-
   if (error) {
     return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>
   }
@@ -58,11 +54,37 @@ const Admin = () => {
           </p>
         </div>
         <span className="text-xs text-[var(--muted)]">
-          Total: {recipes.length} recetas
+          {loading ? 'Cargando...' : `Total: ${recipes.length} recetas`}
         </span>
       </div>
 
-      {recipes.length === 0 ? (
+      {loading ? (
+        <div
+          role="status"
+          aria-live="polite"
+          aria-label="Cargando recetas"
+          className="space-y-3"
+        >
+          <span className="sr-only">Cargando recetas</span>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div
+              key={`admin-skeleton-${index}`}
+              className="flex flex-col gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="space-y-2">
+                <div className="h-3 w-40 rounded-full bg-[var(--border)] animate-pulse" />
+                <div className="h-3 w-56 rounded-full bg-[var(--border)] animate-pulse" />
+                <div className="h-3 w-32 rounded-full bg-[var(--border)] animate-pulse" />
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="h-7 w-14 rounded-full bg-[var(--border)] animate-pulse" />
+                <div className="h-7 w-16 rounded-full bg-[var(--border)] animate-pulse" />
+                <div className="h-7 w-16 rounded-full bg-[var(--border)] animate-pulse" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : recipes.length === 0 ? (
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] py-16 text-center">
           <p className="text-sm text-[var(--muted)]">
             No hay recetas para administrar.

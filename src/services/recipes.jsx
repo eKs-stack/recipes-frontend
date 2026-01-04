@@ -1,12 +1,23 @@
 import { API_URL, getAuthHeaders } from './api'
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const DEV_DELAY_MS = 650
+
 export const getRecipes = async () => {
+  if (import.meta.env.DEV) {
+    // Temporary dev delay to make skeletons visible.
+    await delay(DEV_DELAY_MS)
+  }
   const res = await fetch(`${API_URL}/recipes`)
   if (!res.ok) throw new Error('Error cargando recetas')
   return res.json()
 }
 
 export const getMyRecipes = async () => {
+  if (import.meta.env.DEV) {
+    // Temporary dev delay to make skeletons visible.
+    await delay(DEV_DELAY_MS)
+  }
   const res = await fetch(`${API_URL}/recipes/mine`, {
     headers: {
       ...getAuthHeaders()
