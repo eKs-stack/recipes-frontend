@@ -7,12 +7,32 @@ const Admin = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const SKELETON_STORAGE_KEY = 'admin-recipes:count'
+  const getStoredSkeletonCount = () => {
+    if (typeof window === 'undefined') return 6
+    const stored = Number.parseInt(
+      window.localStorage.getItem(SKELETON_STORAGE_KEY),
+      10
+    )
+    return Number.isFinite(stored) ? stored : 6
+  }
+  const [skeletonCount, setSkeletonCount] = useState(
+    getStoredSkeletonCount
+  )
 
   useEffect(() => {
     const loadRecipes = async () => {
       try {
         const data = await getRecipes()
         setRecipes(data)
+        const nextCount = Array.isArray(data) ? data.length : 0
+        setSkeletonCount(nextCount)
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(
+            SKELETON_STORAGE_KEY,
+            String(nextCount)
+          )
+        }
       } catch {
         setError('No se pudieron cargar las recetas')
         showError('No se pudieron cargar las recetas')
@@ -66,7 +86,7 @@ const Admin = () => {
           className="space-y-3"
         >
           <span className="sr-only">Cargando recetas</span>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {Array.from({ length: skeletonCount }).map((_, index) => (
             <div
               key={`admin-skeleton-${index}`}
               className="flex flex-col gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:flex-row sm:items-center sm:justify-between"

@@ -10,6 +10,7 @@ const Favorites = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const skeletonCount = favorites.length
 
   useEffect(() => {
     let active = true
@@ -91,6 +92,7 @@ const Favorites = () => {
       <RecipeGrid
         recipes={recipes}
         onSelectRecipe={() => {}}
+        skeletonCount={skeletonCount}
         loading={loading}
       />
     </main>

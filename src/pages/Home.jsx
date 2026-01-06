@@ -13,6 +13,19 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('')
   const [activeCategory, setActiveCategory] = useState('Todas')
 
+  const SKELETON_STORAGE_KEY = 'recipes:count'
+  const getStoredSkeletonCount = () => {
+    if (typeof window === 'undefined') return 12
+    const stored = Number.parseInt(
+      window.localStorage.getItem(SKELETON_STORAGE_KEY),
+      10
+    )
+    return Number.isFinite(stored) ? stored : 12
+  }
+  const [skeletonCount, setSkeletonCount] = useState(
+    getStoredSkeletonCount
+  )
+
   const categoryOptions = [
     'Todas',
     'Principal',
@@ -38,6 +51,14 @@ export default function Home() {
       try {
         const data = await getRecipes()
         setRecipes(data)
+        const nextCount = Array.isArray(data) ? data.length : 0
+        setSkeletonCount(nextCount)
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(
+            SKELETON_STORAGE_KEY,
+            String(nextCount)
+          )
+        }
       } catch {
         setError('No se pudieron cargar las recetas')
         showError('No se pudieron cargar las recetas')
@@ -141,6 +162,7 @@ export default function Home() {
         recipes={filteredRecipes}
         onSelectRecipe={(recipe) => console.log(recipe)}
         showEdit={false}
+        skeletonCount={skeletonCount}
         loading={loading}
       />
     </main>
