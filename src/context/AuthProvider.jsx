@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
   const [loading, setLoading] = useState(true)
+  // evita refrescar el perfil a la vez
   const refreshInFlight = useRef(false)
 
   const login = useCallback((authToken, authUser) => {

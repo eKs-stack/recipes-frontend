@@ -22,9 +22,7 @@ export default function Home() {
     )
     return Number.isFinite(stored) ? stored : 12
   }
-  const [skeletonCount, setSkeletonCount] = useState(
-    getStoredSkeletonCount
-  )
+  const [skeletonCount, setSkeletonCount] = useState(getStoredSkeletonCount)
 
   const categoryOptions = [
     'Todas',
@@ -37,6 +35,7 @@ export default function Home() {
     'Otro'
   ]
 
+  // normaliza para buscar sin acentos ni mayusculas
   const normalizeText = (value) =>
     value
       ? value
@@ -54,10 +53,7 @@ export default function Home() {
         const nextCount = Array.isArray(data) ? data.length : 0
         setSkeletonCount(nextCount)
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(
-            SKELETON_STORAGE_KEY,
-            String(nextCount)
-          )
+          window.localStorage.setItem(SKELETON_STORAGE_KEY, String(nextCount))
         }
       } catch {
         setError('No se pudieron cargar las recetas')

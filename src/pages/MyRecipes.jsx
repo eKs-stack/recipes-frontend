@@ -43,10 +43,7 @@ const MyRecipes = () => {
         const nextCount = Array.isArray(data) ? data.length : 0
         setSkeletonCount(nextCount)
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(
-            skeletonStorageKey,
-            String(nextCount)
-          )
+          window.localStorage.setItem(skeletonStorageKey, String(nextCount))
         }
       } catch {
         setError('No se pudieron cargar tus recetas')

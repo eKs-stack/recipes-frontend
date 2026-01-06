@@ -40,6 +40,7 @@ const RecipeCard = ({ recipe, showEdit = true, onClick }) => {
     toggleFavorite(recipe._id)
   }
 
+  // Navegacion unica para que toda la card sea clicable
   const handleNavigate = () => {
     if (typeof onClick === 'function') {
       onClick()

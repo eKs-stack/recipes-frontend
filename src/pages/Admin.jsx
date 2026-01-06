@@ -16,9 +16,7 @@ const Admin = () => {
     )
     return Number.isFinite(stored) ? stored : 6
   }
-  const [skeletonCount, setSkeletonCount] = useState(
-    getStoredSkeletonCount
-  )
+  const [skeletonCount, setSkeletonCount] = useState(getStoredSkeletonCount)
 
   useEffect(() => {
     const loadRecipes = async () => {
@@ -28,10 +26,7 @@ const Admin = () => {
         const nextCount = Array.isArray(data) ? data.length : 0
         setSkeletonCount(nextCount)
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(
-            SKELETON_STORAGE_KEY,
-            String(nextCount)
-          )
+          window.localStorage.setItem(SKELETON_STORAGE_KEY, String(nextCount))
         }
       } catch {
         setError('No se pudieron cargar las recetas')
