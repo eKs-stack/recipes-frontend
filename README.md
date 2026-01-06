@@ -26,42 +26,11 @@ CRUD completo.
 - Listado, detalle, creacion, edicion y borrado de recetas
 - Gestión de errores y confirmaciones con SweetAlert2
 
-## Levantar local (Frontend + Backend)
+## Levantar local (Frontend)
 
-### Backend (API)
-
-1. En otra terminal, entra al repo `recipes-backend` (por ejemplo `../recipes-backend`).
-2. Instala dependencias:
-
-```bash
-npm install
-```
-
-3. Crea `.env` en la raiz:
-
-```env
-PORT=3000
-MONGO_URI=tu_uri_de_mongodb
-JWT_SECRET=tu_secreto_jwt
-```
-
-4. Inicia la API:
-
-```bash
-npm run dev
-```
-
-API en `http://localhost:3000`.
-
-### Frontend (este repo)
-
-1. Crea `.env` en la raiz:
-
-```env
-VITE_API_URL=http://localhost:3000/api
-```
-
-2. Instala y ejecuta:
+1. Asegura que el backend este corriendo (ver https://github.com/eKs-stack/recipes-backend).
+2. Crea `.env` en la raiz (ver "Variables de entorno").
+3. Instala y ejecuta:
 
 ```bash
 npm install
@@ -70,15 +39,6 @@ npm run dev
 
 App en `http://localhost:5173`.
 
-## Instalacion y ejecucion (solo frontend)
-
-Si ya tienes un backend corriendo o quieres usar el backend remoto:
-
-```bash
-npm install
-npm run dev
-```
-
 ## Variables de entorno
 
 Crea un archivo `.env` en la raiz del proyecto:
@@ -86,6 +46,8 @@ Crea un archivo `.env` en la raiz del proyecto:
 ```env
 # Backend local
 VITE_API_URL=http://localhost:3000/api
+# Origen permitido para CORS en local (configurar en el backend)
+VITE_CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
 
 Si no defines `VITE_API_URL`, el frontend usa por defecto:
@@ -104,18 +66,6 @@ Si no defines `VITE_API_URL`, el frontend usa por defecto:
 4. Despliega. Vercel detecta Vite automaticamente.
 
 ---
-
-## Backend en Vercel
-
-El frontend necesita apuntar al backend desplegado en Vercel usando `VITE_API_URL`.
-
-## Endpoints usados
-
-- Auth: `POST /api/auth/login`, `POST /api/auth/register`
-- Recipes: `GET/POST /api/recipes`,
-  `GET/PUT/DELETE /api/recipes/:id`
-
-Las rutas protegidas requieren `Authorization: Bearer <token>`.
 
 ## Build
 
