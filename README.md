@@ -16,7 +16,7 @@ CRUD completo.
 - Vite
 - React Router
 - Tailwind CSS
-- Axios
+- Fetch (API nativa)
 - SweetAlert2
 
 ## Funcionalidades
@@ -46,8 +46,6 @@ Crea un archivo `.env` en la raiz del proyecto:
 ```env
 # Backend local
 VITE_API_URL=http://localhost:3000/api
-# Origen permitido para CORS en local (configurar en el backend)
-VITE_CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
 
 Si no defines `VITE_API_URL`, el frontend usa por defecto:
