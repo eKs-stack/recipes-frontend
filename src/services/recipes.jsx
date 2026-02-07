@@ -16,6 +16,35 @@ export const getMyRecipes = async () => {
   return res.json()
 }
 
+export const getFavoriteRecipes = async () => {
+  const response = await fetch(`${API_URL}/recipes/favorites`, {
+    headers: {
+      ...getAuthHeaders()
+    }
+  })
+
+  if (!response.ok) {
+    throw new Error('Error cargando favoritos')
+  }
+
+  return response.json()
+}
+
+export const toggleFavoriteRecipe = async (id) => {
+  const response = await fetch(`${API_URL}/recipes/${id}/favorite`, {
+    method: 'POST',
+    headers: {
+      ...getAuthHeaders()
+    }
+  })
+
+  if (!response.ok) {
+    throw new Error('Error actualizando favorito')
+  }
+
+  return response.json()
+}
+
 export const createRecipe = async (data) => {
   const response = await fetch(`${API_URL}/recipes`, {
     method: 'POST',

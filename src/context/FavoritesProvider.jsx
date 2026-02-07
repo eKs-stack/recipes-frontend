@@ -1,49 +1,65 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FavoritesContext } from './FavoritesContext'
 import { useAuth } from './useAuth'
+import { getFavoriteRecipes, toggleFavoriteRecipe } from '../services/recipes'
 
-const STORAGE_KEY_PREFIX = 'favoriteRecipes'
-
-const readStoredFavorites = (storageKey) => {
-  if (typeof window === 'undefined' || !storageKey) return []
-
-  const stored = window.localStorage.getItem(storageKey)
-  if (!stored) return []
-
-  try {
-    const parsed = JSON.parse(stored)
-    return Array.isArray(parsed) ? parsed : []
-  } catch {
-    return []
-  }
+const mapFavoriteIds = (recipes) => {
+  if (!Array.isArray(recipes)) return []
+  return recipes
+    .map((recipe) => recipe?._id)
+    .filter((value) => typeof value === 'string')
 }
 
 export const FavoritesProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth()
   const userId = user?.id || user?._id || null
-  // Favs separados por usuario
-  const storageKey = userId ? `${STORAGE_KEY_PREFIX}:${userId}` : null
-  const [refreshVersion, setRefreshVersion] = useState(0)
-  const favorites = useMemo(() => {
-    if (!storageKey || !isAuthenticated) return []
-    const versionOffset = refreshVersion * 0
-    return readStoredFavorites(storageKey).slice(versionOffset)
-  }, [storageKey, isAuthenticated, refreshVersion])
+  const [favoriteIds, setFavoriteIds] = useState([])
+
+  useEffect(() => {
+    let active = true
+    if (!isAuthenticated || !userId) return
+
+    const loadFavorites = async () => {
+      try {
+        const recipes = await getFavoriteRecipes()
+        if (!active) return
+        setFavoriteIds(mapFavoriteIds(recipes))
+      } catch {
+        if (active) setFavoriteIds([])
+      }
+    }
+
+    loadFavorites()
+
+    return () => {
+      active = false
+    }
+  }, [isAuthenticated, userId])
+
+  const favorites = useMemo(
+    () => (isAuthenticated ? favoriteIds : []),
+    [favoriteIds, isAuthenticated]
+  )
 
   const toggleFavorite = useCallback(
-    (id) => {
-      if (!id || !storageKey || !isAuthenticated || typeof window === 'undefined')
-        return
+    async (id) => {
+      if (!id || !isAuthenticated) return
 
-      const current = readStoredFavorites(storageKey)
-      const next = current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id]
+      try {
+        const response = await toggleFavoriteRecipe(id)
+        const nextFavorite = Boolean(response?.isFavorite)
 
-      window.localStorage.setItem(storageKey, JSON.stringify(next))
-      setRefreshVersion((previous) => previous + 1)
+        setFavoriteIds((previous) => {
+          if (nextFavorite) {
+            return previous.includes(id) ? previous : [...previous, id]
+          }
+          return previous.filter((value) => value !== id)
+        })
+      } catch {
+        // noop: el componente consumidor decide cómo mostrar errores
+      }
     },
-    [isAuthenticated, storageKey]
+    [isAuthenticated]
   )
 
   const isFavorite = useCallback((id) => favorites.includes(id), [favorites])

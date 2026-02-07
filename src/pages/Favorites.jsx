@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getRecipes } from '../services/recipes'
+import { getFavoriteRecipes } from '../services/recipes'
 import RecipeGrid from '../components/RecipeGrid'
 import { useFavorites } from '../context/useFavorites'
 import { showError } from '../utils/alerts'
@@ -28,9 +28,7 @@ const Favorites = () => {
       setLoading(true)
       setError(null)
       try {
-        const data = await getRecipes()
-        const favoriteSet = new Set(favorites)
-        const filtered = data.filter((recipe) => favoriteSet.has(recipe._id))
+        const filtered = await getFavoriteRecipes()
         if (active) {
           setRecipes(filtered)
         }
