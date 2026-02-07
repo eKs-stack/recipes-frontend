@@ -54,7 +54,7 @@ const MyRecipes = () => {
     }
 
     loadRecipes()
-  }, [])
+  }, [skeletonStorageKey])
 
   if (error) {
     return <p className="mt-20 text-center text-[var(--danger)]">{error}</p>

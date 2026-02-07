@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 const CATEGORY_OPTIONS = [
   'Principal',
   'Desayuno',
@@ -32,39 +30,24 @@ const RecipeForm = ({
 }) => {
   const inputClass =
     'w-full rounded-lg border border-[var(--border)] bg-[var(--card-strong)] p-3 text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
-  const [customCategory, setCustomCategory] = useState('')
-  const [categorySelection, setCategorySelection] = useState('')
-
-  useEffect(() => {
-    if (!category) {
-      setCategorySelection('')
-      setCustomCategory('')
-      return
-    }
-    if (CATEGORY_OPTIONS.includes(category)) {
-      setCategorySelection(category)
-      setCustomCategory('')
-      return
-    }
-    setCategorySelection('Otro')
-    setCustomCategory(category)
-  }, [category])
+  const categorySelection = CATEGORY_OPTIONS.includes(category)
+    ? category
+    : category
+      ? 'Otro'
+      : ''
+  const customCategory = categorySelection === 'Otro' ? category : ''
 
   const handleCategoryChange = (event) => {
     const nextCategory = event.target.value
     if (nextCategory === 'Otro') {
-      setCategorySelection('Otro')
-      setCategory(customCategory || '')
+      setCategory('')
       return
     }
-    setCategorySelection(nextCategory)
-    setCustomCategory('')
     setCategory(nextCategory)
   }
 
   const handleCustomCategoryChange = (event) => {
     const value = event.target.value
-    setCustomCategory(value)
     setCategory(value)
   }
 
