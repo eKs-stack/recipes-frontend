@@ -1,4 +1,4 @@
-import { API_URL, getAuthHeaders } from './api'
+import { API_URL } from './api'
 
 export const getRecipes = async () => {
   const res = await fetch(`${API_URL}/recipes`)
@@ -8,9 +8,7 @@ export const getRecipes = async () => {
 
 export const getMyRecipes = async () => {
   const res = await fetch(`${API_URL}/recipes/mine`, {
-    headers: {
-      ...getAuthHeaders()
-    }
+    credentials: 'include'
   })
   if (!res.ok) throw new Error('Error cargando recetas')
   return res.json()
@@ -18,9 +16,7 @@ export const getMyRecipes = async () => {
 
 export const getFavoriteRecipes = async () => {
   const response = await fetch(`${API_URL}/recipes/favorites`, {
-    headers: {
-      ...getAuthHeaders()
-    }
+    credentials: 'include'
   })
 
   if (!response.ok) {
@@ -33,9 +29,7 @@ export const getFavoriteRecipes = async () => {
 export const toggleFavoriteRecipe = async (id) => {
   const response = await fetch(`${API_URL}/recipes/${id}/favorite`, {
     method: 'POST',
-    headers: {
-      ...getAuthHeaders()
-    }
+    credentials: 'include'
   })
 
   if (!response.ok) {
@@ -49,9 +43,9 @@ export const createRecipe = async (data) => {
   const response = await fetch(`${API_URL}/recipes`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeaders()
+      'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify(data)
   })
 
@@ -65,9 +59,7 @@ export const createRecipe = async (data) => {
 export const deleteRecipe = async (id) => {
   const response = await fetch(`${API_URL}/recipes/${id}`, {
     method: 'DELETE',
-    headers: {
-      ...getAuthHeaders()
-    }
+    credentials: 'include'
   })
 
   if (!response.ok) {
@@ -89,9 +81,9 @@ export const updateRecipe = async (id, updatedRecipe) => {
   const response = await fetch(`${API_URL}/recipes/${id}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeaders()
+      'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify(updatedRecipe)
   })
 

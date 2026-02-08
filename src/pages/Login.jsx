@@ -22,15 +22,14 @@ const Login = () => {
         : { username: identifier, password }
 
       const data = await loginUser(payload)
-      const authToken = data?.token || data?.accessToken || data?.jwt
       const authUser = data?.user || data?.profile
 
-      if (!authToken || !authUser) {
+      if (!authUser) {
         showError('Respuesta inválida del servidor de autenticación')
         return
       }
 
-      login(authToken, authUser)
+      login(authUser)
       navigate('/')
     } catch {
       showError('Email o contraseña incorrectos')

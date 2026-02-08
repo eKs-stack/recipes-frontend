@@ -1,39 +1,32 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AuthContext } from './AuthContext'
-import { getCurrentUser } from '../services/auth'
+import { getCurrentUser, logoutUser } from '../services/auth'
 
 const REFRESH_INTERVAL_MS = 60000
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [token, setToken] = useState(null)
   const [loading, setLoading] = useState(true)
   // evita refrescar el perfil a la vez
   const refreshInFlight = useRef(false)
 
-  const login = useCallback((authToken, authUser) => {
-    localStorage.setItem('token', authToken)
-    localStorage.removeItem('user')
-    setToken(authToken)
+  const login = useCallback((authUser) => {
     setUser(authUser)
   }, [])
 
-  const logout = useCallback(() => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    setToken(null)
-    setUser(null)
+  const logout = useCallback(async () => {
+    try {
+      await logoutUser()
+    } catch {
+      // noop: limpiar estado local incluso si falla el request
+    } finally {
+      setUser(null)
+    }
   }, [])
 
   const refreshUser = useCallback(
     async ({ silent = false } = {}) => {
       if (refreshInFlight.current) {
-        if (!silent) setLoading(false)
-        return
-      }
-
-      const storedToken = localStorage.getItem('token')
-      if (!storedToken) {
         if (!silent) setLoading(false)
         return
       }
@@ -49,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         const status = error?.response?.status
         if (status === 401 || status === 403) {
-          logout()
+          setUser(null)
         }
       } finally {
         refreshInFlight.current = false
@@ -58,22 +51,15 @@ export const AuthProvider = ({ children }) => {
         }
       }
     },
-    [logout]
+    []
   )
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token')
-    if (storedToken) {
-      setToken(storedToken)
-      refreshUser()
-      return
-    }
-    localStorage.removeItem('user')
-    setLoading(false)
+    refreshUser()
   }, [refreshUser])
 
   useEffect(() => {
-    if (!token) return
+    if (!user) return
 
     const handleFocus = () => {
       refreshUser({ silent: true })
@@ -89,17 +75,16 @@ export const AuthProvider = ({ children }) => {
       window.removeEventListener('focus', handleFocus)
       clearInterval(intervalId)
     }
-  }, [token, refreshUser])
+  }, [user, refreshUser])
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        token,
         login,
         logout,
         loading,
-        isAuthenticated: !!token,
+        isAuthenticated: !!user,
         refreshUser
       }}
     >
