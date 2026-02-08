@@ -1,35 +1,42 @@
 # Recipes Frontend
 
-Frontend en React + Vite para consumir la API de recetas con autenticacion y
-CRUD completo.
+Frontend en React + Vite para consumir la API de recetas.
 
----
+## Enlaces
 
-## Enlaces de entrega
+- Repo: [https://github.com/eKs-stack/recipes-frontend](https://github.com/eKs-stack/recipes-frontend)
+- Deploy: [https://guardatureceta.com/](https://guardatureceta.com/)
 
-- Repo: https://github.com/eKs-stack/recipes-frontend
-- Deploy (Vercel): https://guardatureceta.com/
-
-## Tecnologias
+## Stack
 
 - React 19
 - Vite
 - React Router
 - Tailwind CSS
-- Fetch (API nativa)
+- Axios (auth)
+- Fetch (recipes)
 - SweetAlert2
 
-## Funcionalidades
+## Qué hace
 
-- Registro e inicio de sesion (token en localStorage)
-- Rutas protegidas para crear y editar recetas
-- Listado, detalle, creacion, edicion y borrado de recetas
-- Gestión de errores y confirmaciones con SweetAlert2
+- Registro, login y logout.
+- Rutas protegidas para usuarios autenticados.
+- Ruta de admin para gestion global.
+- Listado publico, detalle, crear, editar y borrar recetas.
+- Favoritos ligados al usuario en backend.
 
-## Levantar local (Frontend)
+## Sesion (estado actual)
 
-1. Asegura que el backend este corriendo (ver https://github.com/eKs-stack/recipes-backend).
-2. Crea `.env` en la raiz (ver "Variables de entorno").
+- Ya no se guarda JWT en `localStorage`.
+- El backend guarda la sesion en cookie `httpOnly`.
+- El frontend manda credenciales en cada request protegida:
+  - `axios` con `withCredentials: true`
+  - `fetch` con `credentials: 'include'`
+
+## Arranque local
+
+1. Arranca backend (`recipes-backend`) en `http://localhost:3000`.
+2. Crea `/Users/aleks/Desktop/REPOS/PERSONALES/recipes-frontend/.env`.
 3. Instala y ejecuta:
 
 ```bash
@@ -37,44 +44,46 @@ npm install
 npm run dev
 ```
 
-App en `http://localhost:5173`.
+App local: `http://localhost:5173`
 
 ## Variables de entorno
 
-Crea un archivo `.env` en la raiz del proyecto:
-
 ```env
-# Backend local
 VITE_API_URL=http://localhost:3000/api
 ```
 
-Si no defines `VITE_API_URL`, el frontend usa por defecto:
-`https://recipes-backend-gilt.vercel.app/api`.
+Si no defines `VITE_API_URL`, usa por defecto `https://recipes-backend-gilt.vercel.app/api`.
 
----
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run preview
+npm run lint
+npm run format
+```
+
+## Estructura principal
+
+- `src/main.jsx`: monta `AuthProvider` y `FavoritesProvider`.
+- `src/App.jsx`: rutas publicas/protegidas/admin.
+- `src/services/auth.jsx`: login/register/me/logout.
+- `src/services/recipes.jsx`: CRUD y favoritos.
+- `src/context/AuthProvider.jsx`: estado de sesion y refresco de usuario.
+- `src/context/FavoritesProvider.jsx`: estado de favoritos por usuario.
 
 ## Deploy (Vercel)
 
-1. Importa el repo en Vercel.
-2. Configura:
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-3. Variables de entorno:
-   - `VITE_API_URL=https://recipes-backend-gilt.vercel.app/api`
-4. Despliega. Vercel detecta Vite automaticamente.
+1. Importa el repo.
+2. Build Command: `npm run build`.
+3. Output Directory: `dist`.
+4. Variable: `VITE_API_URL=<URL_API>/api`.
+5. En backend, agrega tu dominio frontend a `CORS_ORIGINS`.
 
----
+## Troubleshooting
 
-## Build
+- Si ves datos de produccion en local: revisa `VITE_API_URL` y reinicia `npm run dev`.
+- Si login falla por `401/403`: revisa que el backend este enviando cookie y que el frontend use credenciales.
+- Si aparece `429` en auth: espera ventana del rate limit o revisa configuracion de limiter en backend.
 
-```bash
-npm run build
-npm run preview
-```
-
-## Solucion de problemas
-
-- 400 "Credenciales invalidas": el usuario no existe en el backend o la
-  contrasena no coincide. Registra la cuenta en el mismo backend definido por
-  `VITE_API_URL`.
-- 401 al crear/editar/borrar: verifica que el token exista y sea valido.
