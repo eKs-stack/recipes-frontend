@@ -1,3 +1,6 @@
+/**
+ * Aqui arranco React y envuelvo la app con los providers globales.
+ */
 import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'

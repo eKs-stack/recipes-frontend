@@ -1,3 +1,6 @@
+/**
+ * Aqui configuro ESLint para mantener calidad y consistencia en el frontend.
+ */
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'

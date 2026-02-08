@@ -1,3 +1,6 @@
+/**
+ * Aqui hago las peticiones de autenticacion con envio de credenciales.
+ */
 import axios from 'axios'
 import { API_URL } from './api'
 

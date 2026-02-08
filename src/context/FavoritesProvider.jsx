@@ -1,3 +1,6 @@
+/**
+ * Aqui sincronizo favoritos con backend y mantengo su estado en frontend.
+ */
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FavoritesContext } from './FavoritesContext'
 import { useAuth } from './useAuth'

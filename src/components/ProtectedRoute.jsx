@@ -1,3 +1,6 @@
+/**
+ * Aqui protejo rutas privadas y redirijo al login si no hay sesion.
+ */
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/useAuth'
 

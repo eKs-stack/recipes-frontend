@@ -1,3 +1,6 @@
+/**
+ * Aqui creo una receta nueva y la envio al backend.
+ */
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createRecipe } from '../services/recipes'

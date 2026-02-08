@@ -1,3 +1,6 @@
+/**
+ * Aqui hago las peticiones de recetas y favoritos (publicas y protegidas).
+ */
 import { API_URL } from './api'
 
 export const getRecipes = async () => {

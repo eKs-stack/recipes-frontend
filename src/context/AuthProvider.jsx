@@ -1,3 +1,6 @@
+/**
+ * Aqui gestiono la sesion del usuario: refresco perfil y expongo login/logout.
+ */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AuthContext } from './AuthContext'
 import { getCurrentUser, logoutUser } from '../services/auth'

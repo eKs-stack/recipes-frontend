@@ -1,3 +1,6 @@
+/**
+ * Aqui defino el enrutado principal con rutas publicas, protegidas y de admin.
+ */
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import NewRecipe from './pages/NewRecipe'

@@ -1,3 +1,4 @@
+/* Aqui defino estilos globales, variables de tema y animaciones compartidas. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

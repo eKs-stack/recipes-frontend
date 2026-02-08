@@ -1,4 +1,7 @@
 'use client'
+/**
+ * Aqui muestro el listado publico con busqueda y filtros.
+ */
 
 import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'

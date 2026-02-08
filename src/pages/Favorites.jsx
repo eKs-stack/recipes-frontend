@@ -1,3 +1,6 @@
+/**
+ * Aqui muestro las recetas que el usuario marco como favoritas.
+ */
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getFavoriteRecipes } from '../services/recipes'

@@ -1,3 +1,6 @@
+/**
+ * Aqui reutilizo el formulario para crear y editar recetas.
+ */
 const CATEGORY_OPTIONS = [
   'Principal',
   'Desayuno',

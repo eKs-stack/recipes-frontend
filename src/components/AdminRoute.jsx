@@ -1,3 +1,6 @@
+/**
+ * Aqui protejo rutas de administracion y exijo rol admin.
+ */
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/useAuth'
 
