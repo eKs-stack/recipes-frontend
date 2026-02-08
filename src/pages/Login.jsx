@@ -1,6 +1,3 @@
-/**
- * Aqui gestiono el inicio de sesion por email o username.
- */
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'

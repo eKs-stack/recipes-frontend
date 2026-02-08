@@ -1,6 +1,3 @@
-/**
- * Aqui renderizo una tarjeta de receta con favorito y acceso a detalle/edicion.
- */
 import { Link, useNavigate } from 'react-router-dom'
 import { Clock, Heart, Users } from 'lucide-react'
 import { useAuth } from '../context/useAuth'
@@ -43,7 +40,6 @@ const RecipeCard = ({ recipe, showEdit = true, onClick }) => {
     toggleFavorite(recipe._id)
   }
 
-  // Navegacion unica para que toda la card sea clicable
   const handleNavigate = () => {
     if (typeof onClick === 'function') {
       onClick()

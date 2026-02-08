@@ -1,6 +1,3 @@
-/**
- * Aqui gestiono el cambio de tema y guardo la preferencia visual.
- */
 import { useEffect, useState } from 'react'
 
 const DarkModeToggle = () => {

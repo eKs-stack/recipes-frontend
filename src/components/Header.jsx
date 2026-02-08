@@ -1,6 +1,3 @@
-/**
- * Aqui renderizo la cabecera y la navegacion segun sesion y rol.
- */
 import { useState } from 'react'
 import { Plus, LogOut, Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom'

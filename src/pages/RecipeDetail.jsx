@@ -1,6 +1,3 @@
-/**
- * Aqui muestro el detalle completo de una receta.
- */
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getRecipeById } from '../services/recipes'

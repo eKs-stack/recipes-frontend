@@ -1,6 +1,3 @@
-/**
- * Aqui renderizo un skeleton para mostrar carga en el listado.
- */
 const RecipeCardSkeleton = () => {
   return (
     <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">

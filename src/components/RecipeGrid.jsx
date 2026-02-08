@@ -1,6 +1,3 @@
-/**
- * Aqui renderizo el grid de recetas y manejo estados de carga y vacio.
- */
 import RecipeCard from './RecipeCard'
 import RecipeCardSkeleton from './RecipeCardSkeleton'
 export default function RecipeGrid({

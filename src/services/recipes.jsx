@@ -1,6 +1,3 @@
-/**
- * Aqui hago las peticiones de recetas y favoritos (publicas y protegidas).
- */
 import { API_URL } from './api'
 
 export const getRecipes = async () => {
@@ -10,7 +7,6 @@ export const getRecipes = async () => {
 }
 
 export const getMyRecipes = async () => {
-  // Rutas privadas: enviar cookie de sesión en cada request protegida.
   const res = await fetch(`${API_URL}/recipes/mine`, {
     credentials: 'include'
   })

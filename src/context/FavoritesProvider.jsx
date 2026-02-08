@@ -1,6 +1,3 @@
-/**
- * Aqui sincronizo favoritos con backend y mantengo su estado en frontend.
- */
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FavoritesContext } from './FavoritesContext'
 import { useAuth } from './useAuth'
@@ -24,7 +21,6 @@ export const FavoritesProvider = ({ children }) => {
 
     const loadFavorites = async () => {
       try {
-        // Fuente de verdad: favoritos guardados en backend por usuario.
         const recipes = await getFavoriteRecipes()
         if (!active) return
         setFavoriteIds(mapFavoriteIds(recipes))
@@ -53,15 +49,14 @@ export const FavoritesProvider = ({ children }) => {
         const response = await toggleFavoriteRecipe(id)
         const nextFavorite = Boolean(response?.isFavorite)
 
-        // Actualización optimista para que la UI reaccione al instante.
         setFavoriteIds((previous) => {
           if (nextFavorite) {
             return previous.includes(id) ? previous : [...previous, id]
           }
           return previous.filter((value) => value !== id)
         })
-      } catch {
-        // noop: el componente consumidor decide cómo mostrar errores
+      } catch (error) {
+        void error
       }
     },
     [isAuthenticated]

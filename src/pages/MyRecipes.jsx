@@ -1,6 +1,3 @@
-/**
- * Aqui muestro solo las recetas del usuario autenticado.
- */
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/useAuth'
 import { Plus } from 'lucide-react'

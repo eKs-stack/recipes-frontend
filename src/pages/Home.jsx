@@ -1,7 +1,4 @@
 'use client'
-/**
- * Aqui muestro el listado publico con busqueda y filtros.
- */
 
 import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
@@ -38,7 +35,6 @@ export default function Home() {
     'Otro'
   ]
 
-  // normaliza para buscar sin acentos ni mayusculas
   const normalizeText = (value) =>
     value
       ? value

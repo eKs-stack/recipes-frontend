@@ -1,6 +1,3 @@
-/**
- * Aqui centralizo alertas y confirmaciones con SweetAlert2.
- */
 import Swal from 'sweetalert2'
 
 const baseAlert = {

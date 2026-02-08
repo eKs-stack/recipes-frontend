@@ -1,6 +1,3 @@
-/**
- * Aqui gestiono la sesion del usuario: refresco perfil y expongo login/logout.
- */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AuthContext } from './AuthContext'
 import { getCurrentUser, logoutUser } from '../services/auth'
@@ -10,7 +7,6 @@ const REFRESH_INTERVAL_MS = 60000
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  // evita refrescar el perfil a la vez
   const refreshInFlight = useRef(false)
 
   const login = useCallback((authUser) => {
@@ -20,8 +16,8 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       await logoutUser()
-    } catch {
-      // noop: limpiar estado local incluso si falla el request
+    } catch (error) {
+      void error
     } finally {
       setUser(null)
     }
@@ -36,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
       refreshInFlight.current = true
       try {
-        // El backend decide la sesión real leyendo cookie httpOnly en /auth/me.
         const data = await getCurrentUser()
         const authUser = data?.user || data?.profile || data
         if (!authUser) {
@@ -59,7 +54,6 @@ export const AuthProvider = ({ children }) => {
   )
 
   useEffect(() => {
-    // Al abrir la app, intentamos restaurar sesión sin depender de localStorage.
     refreshUser()
   }, [refreshUser])
 
@@ -67,7 +61,6 @@ export const AuthProvider = ({ children }) => {
     if (!user) return
 
     const handleFocus = () => {
-      // Refresca permisos/rol al volver a la pestaña.
       refreshUser({ silent: true })
     }
 
