@@ -25,6 +25,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/favoritos" element={<Favorites />} />
 
+            {/* Seguridad en UI: las rutas privadas se envuelven en ProtectedRoute. */}
             <Route
               path="/new"
               element={
@@ -45,6 +46,7 @@ const App = () => {
 
             <Route path="/recipes/:id" element={<RecipeDetail />} />
 
+            {/* La ruta admin exige sesión y role=admin. */}
             <Route
               path="/admin"
               element={

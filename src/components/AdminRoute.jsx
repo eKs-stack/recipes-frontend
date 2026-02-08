@@ -4,6 +4,7 @@ import { useAuth } from '../context/useAuth'
 export default function AdminRoute({ children }) {
   const { isAuthenticated, loading, user } = useAuth()
 
+  // Espera a resolver sesión para evitar flicker y redirecciones falsas.
   if (loading) return null
 
   if (!isAuthenticated) {
@@ -11,6 +12,7 @@ export default function AdminRoute({ children }) {
   }
 
   if (user?.role !== 'admin') {
+    // La autorización real está en backend; esto solo mejora UX.
     return <Navigate to="/" replace />
   }
 

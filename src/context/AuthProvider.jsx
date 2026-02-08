@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
 
       refreshInFlight.current = true
       try {
+        // El backend decide la sesión real leyendo cookie httpOnly en /auth/me.
         const data = await getCurrentUser()
         const authUser = data?.user || data?.profile || data
         if (!authUser) {
@@ -55,6 +56,7 @@ export const AuthProvider = ({ children }) => {
   )
 
   useEffect(() => {
+    // Al abrir la app, intentamos restaurar sesión sin depender de localStorage.
     refreshUser()
   }, [refreshUser])
 
@@ -62,6 +64,7 @@ export const AuthProvider = ({ children }) => {
     if (!user) return
 
     const handleFocus = () => {
+      // Refresca permisos/rol al volver a la pestaña.
       refreshUser({ silent: true })
     }
 
